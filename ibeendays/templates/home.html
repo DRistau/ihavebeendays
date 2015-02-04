@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>I been {action} for {x} days</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "css/skeleton.css" %}">
+
+    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="one-half column">
+                <h4>I been {action} for {x} days</h4>
+
+                <p>Yo!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
