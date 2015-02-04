@@ -13,6 +13,9 @@
     "url": "https://github.com/kplaube/ibeendays/issues"
   },
   "homepage": "https://ibeendays.herokuapp.com/",
+  "engines": {
+      "node": "0.10.x"
+  },
   "devDependencies": {
     "grunt": "~0.4.5"
   }
