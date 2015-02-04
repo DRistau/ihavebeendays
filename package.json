@@ -1,0 +1,19 @@
+{
+  "name": "ibeendays",
+  "version": "1.0.0",
+  "description": "ibeendays ---------",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kplaube/ibeendays.git"
+  },
+  "author": "Klaus Laube",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kplaube/ibeendays/issues"
+  },
+  "homepage": "https://ibeendays.herokuapp.com/",
+  "devDependencies": {
+    "grunt": "~0.4.5"
+  }
+}
