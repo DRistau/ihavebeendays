@@ -10,4 +10,3 @@ class HomeAvailableTestCase(TestCase):
         response = self.client.get(self.route)
 
         self.assertEqual(response.status_code, 200)
-

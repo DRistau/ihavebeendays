@@ -8,8 +8,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIR = os.path.join(BASE_DIR, 'ibeendays')
 TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
@@ -19,7 +22,8 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')^h_)$^!@py_ems#1o03kx20*h^$nh%3iw0+s@g0^@kiy39$=e'
+DEFAULT_SECRET_KEY = ')^h_)$^!@py_ems#1o03kx20*h^$nh%3iw0+s@g0^@kiy39$=e'
+SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -65,6 +69,9 @@ DATABASES = {
     }
 }
 
+DATABASES['default'].update(dj_database_url.config())
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -82,4 +89,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, 'static'),
+)
