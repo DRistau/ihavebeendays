@@ -3,4 +3,4 @@ python:
     - "3.4"
 install:
     - pip install -r requirements-tests.txt
-script: python manage.py test
+script: make test
