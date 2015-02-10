@@ -1,0 +1,15 @@
+.cover {
+  margin: 180px 0 40px 0; }
+
+.cover-title {
+  text-align: center; }
+
+.cover-title-action {
+  display: block; }
+
+.cover-buttons {
+  margin: 0 auto;
+  max-width: 205px; }
+
+.tasks-done-label {
+  width: 70%; }
