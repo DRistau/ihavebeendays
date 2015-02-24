@@ -12,7 +12,7 @@
 
 .cover-buttons {
   margin: 0 auto;
-  max-width: 205px; }
+  text-align: center; }
 
 .tasks-done-table tr:nth-child(2n) {
   background: #f9f9f9; }
