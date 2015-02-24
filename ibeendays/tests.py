@@ -10,3 +10,13 @@ class HomeAvailableTestCase(TestCase):
         response = self.client.get(self.route)
 
         self.assertEqual(response.status_code, 200)
+
+
+class LoginTestCase(TestCase):
+    def setUp(self):
+        self.route = reverse('login')
+
+    def test_login_page_should_be_available(self):
+        response = self.client.get(self.route)
+
+        self.assertEqual(response.status_code, 200)
