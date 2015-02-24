@@ -1,66 +1,48 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>I been {action} for {x} days</title>
+{% extends "base.html" %}
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block content %}
+    <div class="cover">
+        <h1 class="cover-title">I been
+            <span class="cover-title-days">0 day(s)</span>
+            <span class="cover-title-action">Without sleep</span></h1>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-    <link rel="stylesheet" href="{% static "css/skeleton.css" %}">
-    <link rel="stylesheet" href="{% static "css/styles.css" %}">
-
-    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}">
-</head>
-<body>
-    <div class="container">
-        <div class="cover">
-            <h1 class="cover-title">I been
-                <span class="cover-title-days">0 day(s)</span>
-                <span class="cover-title-action">Without sleep</span></h1>
-
-            <div class="cover-buttons">
-                <a href="#" class="button button-primary">Reset</a>
-                <a href="#" class="button">Done</a>
-            </div>
-        </div>
-
-        <div class="tasks-done">
-            <table class="tasks-done-table u-full-width">
-                <tbody>
-                    <tr>
-                        <td class="tasks-done-label">Without sleep</td>
-                        <td>1 day(s)</td>
-                        <td>Feb, 09 2015 - Feb, 10 2015</td>
-                    </tr>
-                    <tr>
-                        <td class="tasks-done-label">Without sleep</td>
-                        <td>1 day(s)</td>
-                        <td>Feb, 09 2015 - Feb, 10 2015</td>
-                    </tr>
-                    <tr>
-                        <td class="tasks-done-label">Without sleep</td>
-                        <td>1 day(s)</td>
-                        <td>Feb, 09 2015 - Feb, 10 2015</td>
-                    </tr>
-                    <tr>
-                        <td class="tasks-done-label">Without sleep</td>
-                        <td>1 day(s)</td>
-                        <td>Feb, 09 2015 - Feb, 10 2015</td>
-                    </tr>
-                    <tr>
-                        <td class="tasks-done-label">Without sleep</td>
-                        <td>1 day(s)</td>
-                        <td>Feb, 09 2015 - Feb, 10 2015</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="cover-buttons">
+            <a href="#" class="button button-primary">Reset</a>
+            <a href="#" class="button">Done</a>
         </div>
     </div>
-</body>
-</html>
+    <!-- /.cover -->
+
+    <div class="tasks-done">
+        <table class="tasks-done-table u-full-width">
+            <tbody>
+                <tr>
+                    <td class="tasks-done-label">Without sleep</td>
+                    <td>1 day(s)</td>
+                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+                </tr>
+                <tr>
+                    <td class="tasks-done-label">Without sleep</td>
+                    <td>1 day(s)</td>
+                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+                </tr>
+                <tr>
+                    <td class="tasks-done-label">Without sleep</td>
+                    <td>1 day(s)</td>
+                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+                </tr>
+                <tr>
+                    <td class="tasks-done-label">Without sleep</td>
+                    <td>1 day(s)</td>
+                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+                </tr>
+                <tr>
+                    <td class="tasks-done-label">Without sleep</td>
+                    <td>1 day(s)</td>
+                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.tasks-done -->
+{% endblock content %}
