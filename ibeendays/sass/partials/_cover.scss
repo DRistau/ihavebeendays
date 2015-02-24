@@ -1,5 +1,9 @@
 .cover {
-  margin: 180px 0 40px 0;
+  margin: 40px 0;
+
+  @include desktop {
+    margin-top: 180px;
+  }
 }
 
 .cover-title {
