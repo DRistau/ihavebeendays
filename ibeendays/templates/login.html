@@ -5,9 +5,8 @@
         <h1 class="cover-title">Do the login, dude!</h1>
 
         <div class="cover-buttons">
-            <a href="#" class="button button-primary">Google</a>
-            <a href="#" class="button button-primary">Facebook</a>
-            <a href="#" class="button button-primary">Twitter</a>
+            <a href="{% url "social:begin" "facebook" %}" class="button button-primary">Facebook</a>
+            <a href="{% url "social:begin" "google-oauth2" %}" class="button button-primary">Google</a>
         </div>
     </div>
     <!-- /.cover -->
