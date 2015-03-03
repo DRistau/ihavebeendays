@@ -32,7 +32,9 @@ DEBUG = not IS_PRODUCTION
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ibeendays.herokuapp.com',
+]
 
 
 # Application definition
