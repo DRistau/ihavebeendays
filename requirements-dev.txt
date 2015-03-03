@@ -1,6 +1,7 @@
 -r requirements.txt
 
+jedi
 flake8
 django-debug-toolbar
 pytest
-jedi
+pytest-xdist
