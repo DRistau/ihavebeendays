@@ -10,132 +10,139 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 import os
 import dj_database_url
-
-IS_PRODUCTION = 'BUILDPACK_URL' in os.environ
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-PROJECT_DIR = os.path.join(BASE_DIR, 'ibeendays')
-TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
+from configurations import Configuration
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+class Base(Configuration):
+    # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-DEFAULT_SECRET_KEY = ')^h_)$^!@py_ems#1o03kx20*h^$nh%3iw0+s@g0^@kiy39$=e'
-SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    PROJECT_DIR = os.path.join(BASE_DIR, 'ibeendays')
+    TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not IS_PRODUCTION
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-TEMPLATE_DEBUG = DEBUG
+    # SECURITY WARNING: keep the secret key used in production secret!
+    DEFAULT_SECRET_KEY = ')^h_)$^!@py_ems#1o03kx20*h^$nh%3iw0+s@g0^@kiy39$=e'
+    SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
-ALLOWED_HOSTS = [
-    'ibeendays.herokuapp.com',
-]
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = False
+
+    TEMPLATE_DEBUG = False
+
+    ALLOWED_HOSTS = [
+        'ibeendays.herokuapp.com',
+    ]
+
+    # Application definition
+
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+
+        'social.apps.django_app.default',
+
+        'core',
+    )
+
+    MIDDLEWARE_CLASSES = (
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    )
+
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        'django.contrib.auth.context_processors.auth',
+        'django.core.context_processors.debug',
+        'django.core.context_processors.i18n',
+        'django.core.context_processors.media',
+        'django.contrib.messages.context_processors.messages',
+        'social.apps.django_app.context_processors.backends',
+    )
+
+    ROOT_URLCONF = 'ibeendays.urls'
+
+    WSGI_APPLICATION = 'ibeendays.wsgi.application'
+
+    # Database
+    # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+    DATABASES['default'].update(dj_database_url.config())
+
+    # Internationalization
+    # https://docs.djangoproject.com/en/1.7/topics/i18n/
+
+    LANGUAGE_CODE = 'en-us'
+
+    TIME_ZONE = 'UTC'
+
+    USE_I18N = True
+
+    USE_L10N = True
+
+    USE_TZ = True
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (
+        os.path.join(PROJECT_DIR, 'static'),
+    )
+
+    # Authentication
+
+    AUTHENTICATION_BACKENDS = {
+        'social.backends.facebook.FacebookOAuth2',
+        'social.backends.google.GoogleOAuth2',
+
+        'django.contrib.auth.backends.ModelBackend',
+    }
+
+    SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+    SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
+    SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_KEY')
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_SECRET')
+
+    LOGIN_REDIRECT_URL = '/'
 
 
-# Application definition
+class Dev(Base):
+    DEBUG = True
+    TEMPLATE_DEBUG = True
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'social.apps.django_app.default',
-
-    'core',
-)
-
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
-if not IS_PRODUCTION:
-    INSTALLED_APPS = INSTALLED_APPS + (
+    INSTALLED_APPS = Base.INSTALLED_APPS + (
         'debug_toolbar',
     )
 
-    MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
+    MIDDLEWARE_CLASSES = Base.MIDDLEWARE_CLASSES + (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.contrib.messages.context_processors.messages',
-    'social.apps.django_app.context_processors.backends',
-)
 
-ROOT_URLCONF = 'ibeendays.urls'
-
-WSGI_APPLICATION = 'ibeendays.wsgi.application'
+class Test(Base):
+    pass
 
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-DATABASES['default'].update(dj_database_url.config())
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
-)
-
-
-# Authentication
-
-AUTHENTICATION_BACKENDS = {
-    'social.backends.facebook.FacebookOAuth2',
-    'social.backends.google.GoogleOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-}
-
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_SECRET')
-
-LOGIN_REDIRECT_URL = '/'
+class Prod(Base):
+    pass
