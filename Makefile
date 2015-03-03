@@ -13,4 +13,4 @@ grunt:
 	grunt &
 
 test:
-	py.test
+	py.test -s
