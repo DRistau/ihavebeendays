@@ -13,4 +13,4 @@ grunt:
 	grunt &
 
 test:
-	python manage.py test
+	py.test
