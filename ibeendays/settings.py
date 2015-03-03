@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import dj_database_url
 
+IS_PRODUCTION = 'BUILDPACK_URL' in os.environ
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -26,9 +28,9 @@ DEFAULT_SECRET_KEY = ')^h_)$^!@py_ems#1o03kx20*h^$nh%3iw0+s@g0^@kiy39$=e'
 SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not IS_PRODUCTION
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -55,6 +57,15 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+if not IS_PRODUCTION:
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'debug_toolbar',
+    )
+
+    MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
