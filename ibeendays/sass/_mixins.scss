@@ -9,3 +9,9 @@
 		@content;
 	}
 }
+
+@mixin tablet-and-desktop {
+	@media (min-width: #{$tablet-width}) {
+		@content;
+	}
+}
