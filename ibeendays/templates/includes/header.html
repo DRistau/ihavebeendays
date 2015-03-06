@@ -3,24 +3,24 @@
 		<div class="row">
 			<nav class="navbar">
 				<ul class="navbar-list">
-					<li class="navbar-item"><a href="#" class="navbar-logo">IBeenDays</a></li>
-					<li class="navbar-item"><a href="#" class="navbar-item-link">Home</a></li>
+                    <li class="navbar-item"><a href="{% url "home" %}" class="navbar-logo">IBeenDays</a></li>
+                    <li class="navbar-item"><a href="{% url "home" %}" class="navbar-item-link">Home</a></li>
 				</ul>
 
                 <ul class="navbar-login">
 					{% if user.is_authenticated %}
                         <li class="navbar-item">
-                            <a href="#" class="navbar-item-link">Logout</a>
+                            <a href="{% url "logout" %}" class="navbar-item-link">Logout</a>
                         </li>
                         <li class="navbar-item">
-                            <a href="/" class="navbar-item-link">
+                            <a href="#" class="navbar-item-link">
                                 <img src="https://www.gravatar.com/avatar/6dc6a443c28aeb0b3845c50cda739269?s=48&d=mm"
                                     class="navbar-avatar" width="42" height="42">
                             </a>
                         </li>
 					{% else %}
                         <li class="navbar-item">
-						    <a href="/login/" class="navbar-item-link">Sign in / Sign up</a>
+                            <a href="{% url "login" %}" class="navbar-item-link">Sign in / Sign up</a>
                         </li>
 					{% endif %}
 				</ul>
