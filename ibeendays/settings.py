@@ -84,8 +84,6 @@ class Base(Configuration):
         }
     }
 
-    DATABASES['default'].update(dj_database_url.config())
-
     # Internationalization
     # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -143,8 +141,13 @@ class Dev(Base):
 
 
 class Test(Base):
-    pass
+    DATABASES = Base.DATABASES
+    DATABASES['default'].update({
+        'NAME': ':memory:',
+    })
 
 
 class Prod(Base):
-    pass
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
