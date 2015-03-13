@@ -141,10 +141,7 @@ class Dev(Base):
 
 
 class Test(Base):
-    DATABASES = Base.DATABASES
-    DATABASES['default'].update({
-        'NAME': ':memory:',
-    })
+    pass
 
 
 class Prod(Base):

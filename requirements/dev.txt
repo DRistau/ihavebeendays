@@ -5,3 +5,4 @@ flake8
 django-debug-toolbar
 pytest
 pytest-django
+factory_boy
