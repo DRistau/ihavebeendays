@@ -125,6 +125,8 @@ class Base(Configuration):
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_SECRET')
 
     LOGIN_REDIRECT_URL = '/'
+    LOGOUT_REDIRECT_URL = '/'
+    LOGOUT_URL = '/logout/'
 
 
 class Dev(Base):
