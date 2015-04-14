@@ -7,3 +7,4 @@ pytest
 pytest-django
 factory_boy
 honcho
+pytest-cov==1.8.1
