@@ -11,4 +11,4 @@ grunt:
 	grunt &
 
 test:
-	py.test -s --cov . core ibeendays
+	py.test core ibeendays
