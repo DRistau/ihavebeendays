@@ -4,6 +4,8 @@ python:
 install:
   - pip install -r requirements/dev.txt
 script: make test
+after_success:
+  - coveralls
 deploy:
   provider: heroku
   api_key:
