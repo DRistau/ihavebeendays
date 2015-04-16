@@ -3,6 +3,7 @@ IBeenDays
 
 [![Build Status](https://travis-ci.org/kplaube/ibeendays.svg?branch=master)](https://travis-ci.org/kplaube/ibeendays)
 [![Coverage Status](https://coveralls.io/repos/kplaube/ibeendays/badge.svg?branch=master)](https://coveralls.io/r/kplaube/ibeendays?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/2b64d335362d40198fa6be5f9a6c01ba)](https://www.codacy.com/app/kplaube/ibeendays)
 
 IBeenDays (working title) is a web app that helps you tracking how many days
 you have doing (or not doing) something. I'm building this application in order
