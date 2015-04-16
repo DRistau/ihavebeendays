@@ -57,3 +57,4 @@ target/
 # Development environment stuff:
 *.sqlite3
 *.map
+.ropeproject
