@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 from configurations import Configuration
 
@@ -19,6 +20,8 @@ class Base(Configuration):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     PROJECT_DIR = os.path.join(BASE_DIR, 'ibeendays')
     TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
+
+    sys.path.append(PROJECT_DIR)
 
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -48,7 +51,7 @@ class Base(Configuration):
 
         'social.apps.django_app.default',
 
-        'core',
+        'ibeendays.core',
     )
 
     MIDDLEWARE_CLASSES = (

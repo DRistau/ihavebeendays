@@ -2,7 +2,7 @@ install:
 	pip install -r requirements/dev.txt
 	npm install
 
-run: grunt runserver
+run: clean grunt runserver
 
 runserver:
 	honcho start
@@ -10,5 +10,8 @@ runserver:
 grunt:
 	grunt &
 
-test:
+test: clean
 	py.test
+
+clean:
+	find . -name '*.pyc' -delete
