@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<div class="cover">
+		<h1 class="cover-title">Let laziness behind!</h1>
+
+		<div class="cover-description">
+			<p><em>IBeenDays</em> will help you to break bad habits,
+                and create good habits instead!</p>
+			<p>How? Helping you to measure how much time you spent
+                doing (or not doing) specific thing.</p>
+        </div>
+
+        <div class="cover-buttons">
+            <a href="{% url 'login' %}" class="button button-primary">Get started</a>
+        </div>
+
+        <div class="cover-disclaimer">
+            <p>Don't believe me? I'm x days writing things in English
+                to practice de language :)</p>
+        </div>
+	</div>
+
+	{% comment %}
     <div class="cover">
         <h1 class="cover-title">I been
             <span class="cover-title-days">0 day(s)</span>
@@ -45,4 +66,5 @@
         </table>
     </div>
     <!-- /.tasks-done -->
+	{% endcomment %}
 {% endblock content %}

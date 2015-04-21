@@ -59,6 +59,17 @@
 .cover-title-action {
   display: block; }
 
+.cover-description {
+  margin-bottom: 4rem;
+  text-align: center; }
+  .cover-description p {
+    margin-bottom: 0.5rem; }
+
+.cover-disclaimer {
+  color: #999;
+  font-size: 1rem;
+  text-align: center; }
+
 .cover-buttons {
   margin: 0 auto;
   text-align: center; }
