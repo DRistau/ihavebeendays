@@ -12,4 +12,4 @@ def test_home_is_available(home_request):
 
 
 def test_login_link_is_visible_when_user_is_anonymous(home_request):
-    assert 'Sign in' in str(home_request.content)
+    assert 'Log in' in str(home_request.content)

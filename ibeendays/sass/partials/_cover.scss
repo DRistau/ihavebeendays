@@ -32,4 +32,12 @@
 .cover-buttons {
   margin: 0 auto;
   text-align: center;
+
+  .button {
+    width: 100%;
+
+    @include tablet-and-desktop {
+      width: auto;
+    }
+  }
 }

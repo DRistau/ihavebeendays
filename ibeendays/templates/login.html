@@ -2,11 +2,19 @@
 
 {% block content %}
     <div class="cover">
-        <h1 class="cover-title">Do the login, dude!</h1>
+        <h1 class="cover-title">Log in</h1>
+
+        <div class="cover-description">
+            <p>First time here? No problem! Use your Facebook or Google Account
+            to start using. <strong>It's free and always will be!</strong></p>
+
+            <p>Already has an account? Do the login through Social Networks.
+            It's easy, fast and extremely safe.</p>
+        </div>
 
         <div class="cover-buttons">
-            <a href="{% url "social:begin" "facebook" %}" class="button button-primary">Facebook</a>
-            <a href="{% url "social:begin" "google-oauth2" %}" class="button button-primary">Google</a>
+            <a href="{% url "social:begin" "facebook" %}" class="button button-primary">Join with Facebook</a>
+            <a href="{% url "social:begin" "google-oauth2" %}" class="button button-primary">Join with Google</a>
         </div>
     </div>
     <!-- /.cover -->

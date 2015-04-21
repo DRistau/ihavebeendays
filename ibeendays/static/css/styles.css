@@ -73,6 +73,11 @@
 .cover-buttons {
   margin: 0 auto;
   text-align: center; }
+  .cover-buttons .button {
+    width: 100%; }
+    @media (min-width: 768px) {
+      .cover-buttons .button {
+        width: auto; } }
 
 .tasks-done-table tr:nth-child(2n) {
   background: #f9f9f9; }
