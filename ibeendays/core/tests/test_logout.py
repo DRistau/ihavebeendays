@@ -1,5 +1,4 @@
 import pytest
-from core.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -10,11 +9,6 @@ def logout_request(client):
         return client.get('/logout/')
 
     return lazy
-
-
-@pytest.fixture
-def user(db):
-    return UserFactory.create()
 
 
 def test_logout_redirect_to_home(logout_request):
