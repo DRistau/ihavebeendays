@@ -52,6 +52,7 @@ class Base(Configuration):
         'social.apps.django_app.default',
 
         'ibeendays.core',
+        'ibeendays.tasks',
     )
 
     MIDDLEWARE_CLASSES = (
