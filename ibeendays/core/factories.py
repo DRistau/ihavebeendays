@@ -10,3 +10,4 @@ class UserFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = User
+        django_get_or_create = ('username', )

@@ -1,10 +1,21 @@
 import pytest
 from core.factories import UserFactory
+from tasks.factories import TaskFactory
 
 
 @pytest.fixture
 def user(db):
     return UserFactory.create()
+
+
+@pytest.fixture
+def task(db):
+    return TaskFactory.create()
+
+
+@pytest.fixture
+def tasks(db):
+    return TaskFactory.create_batch(3)
 
 
 @pytest.fixture
