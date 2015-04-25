@@ -5,7 +5,7 @@ from ibeendays.tasks.models import Task
 
 class TaskFactory(factory.DjangoModelFactory):
     title = factory.Sequence(lambda n: 'Task {0}'.format(n))
-    user = UserFactory.create()
+    user = factory.SubFactory(UserFactory)
 
     class Meta:
         model = Task

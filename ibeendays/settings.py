@@ -146,7 +146,12 @@ class Dev(Base):
 
 
 class Test(Base):
-    pass
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
 
 
 class Prod(Base):
