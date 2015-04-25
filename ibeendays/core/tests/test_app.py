@@ -5,7 +5,7 @@ def test_app_view_as_anonymous_user_redirects_to_login(client):
     response = client.get(reverse('app'))
 
     assert response.status_code == 302
-    assert response.url == 'http://testserver/login/?next=/app/'
+    assert response.url == 'http://testserver/login/?next=/tasks/'
 
 
 def test_app_view_is_available_when_logged_in(logged_in_request, user):

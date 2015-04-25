@@ -19,4 +19,4 @@ def test_home_redirects_to_app_when_user_is_authenticated(logged_in_request):
     response = logged_in_request(reverse('home'))
 
     assert response.status_code == 302
-    assert response.url == 'http://testserver/app/'
+    assert response.url == 'http://testserver/tasks/'
