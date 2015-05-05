@@ -7,7 +7,7 @@ class TaskListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super(TaskListView, self).get_queryset(*args, **kwargs)
-        return qs.filter(user=self.request.user)
+        return qs.filter(user=self.request.user).finished()
 
 
 class TaskCreateView(CreateView):

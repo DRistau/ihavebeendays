@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from core.factories import UserFactory
 from tasks.factories import TaskFactory
 
@@ -16,8 +17,13 @@ def task(db):
 
 
 @pytest.fixture
-def tasks(db):
-    return TaskFactory.create_batch(3)
+def unfinished_tasks(db):
+    return TaskFactory.create_batch(1)
+
+
+@pytest.fixture
+def finished_tasks(db):
+    return TaskFactory.create_batch(3, finished_at=datetime.now())
 
 
 @pytest.fixture
