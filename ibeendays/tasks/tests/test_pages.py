@@ -16,3 +16,9 @@ def test_tasks_page_is_available_when_logged_in(logged_in_request, user):
 def test_tasks_page_uses_task_list_template(logged_in_request):
     response = logged_in_request(reverse('tasks'))
     assert 'Without sleep' in str(response.content)
+
+
+def test_tasks_page_shows_done_and_reset_actions_when_a_task_is_already_started(logged_in_request):
+    response = logged_in_request(reverse('tasks'))
+    assert 'Done' in str(response.content)
+    assert 'Reset' in str(response.content)
