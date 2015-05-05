@@ -1,7 +1,18 @@
 import pytest
+from django.core.urlresolvers import reverse
 from ibeendays.core.factories import UserFactory
 from ibeendays.tasks.models import Task
 from ibeendays.tasks.views import TaskCreateView, TaskListView
+
+
+@pytest.fixture
+def response_task_create(rf, user):
+    request = rf.post('/tasks/add/', {
+        'title': 'Task test',
+    })
+    request.user = user
+    task_create_view = TaskCreateView.as_view()
+    return task_create_view(request)
 
 
 class TestTaskListView:
@@ -31,14 +42,9 @@ class TestTaskListView:
 class TestTaskCreateView:
 
     @pytest.mark.django_db
-    def test_create_a_task_to_work_with(self, rf, user):
-        request = rf.post('/tasks/add/', {
-            'title': 'Task test',
-        })
-        request.user = user
-
-        task_create_view = TaskCreateView.as_view()
-        response = task_create_view(request)
-
+    def test_create_a_task_to_work_with(self, response_task_create):
         assert Task.objects.count() == 1
-        assert response.status_code == 302
+
+    def test_redirect_to_tasks_after_creation(self, response_task_create):
+        assert response_task_create.status_code == 302
+        assert response_task_create.url == reverse('tasks')
