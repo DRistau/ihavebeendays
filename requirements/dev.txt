@@ -10,3 +10,4 @@ honcho
 pytest-cov
 pytest-xdist
 python-coveralls
+pyquery

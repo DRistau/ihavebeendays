@@ -1,3 +1,4 @@
+from pyquery import PyQuery as pq
 from django.core.urlresolvers import reverse
 
 
@@ -20,5 +21,7 @@ def test_tasks_page_uses_task_list_template(logged_in_request):
 
 def test_tasks_page_shows_done_and_reset_actions_when_a_task_is_already_started(logged_in_request):
     response = logged_in_request(reverse('tasks'))
-    assert 'Done' in str(response.content)
-    assert 'Reset' in str(response.content)
+    buttons = pq(response.content).find('.cover-buttons')
+
+    assert buttons.find('.button')[0].text == 'Reset'
+    assert buttons.find('.button')[1].text == 'Done'
