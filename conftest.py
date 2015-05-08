@@ -17,13 +17,13 @@ def task(db):
 
 
 @pytest.fixture
-def unfinished_tasks(db):
-    return TaskFactory.create_batch(1)
+def unfinished_tasks(db, user):
+    return TaskFactory.create_batch(1, user=user)
 
 
 @pytest.fixture
-def finished_tasks(db):
-    return TaskFactory.create_batch(3, finished_at=datetime.now())
+def finished_tasks(db, user):
+    return TaskFactory.create_batch(3, finished_at=datetime.now(), user=user)
 
 
 @pytest.fixture

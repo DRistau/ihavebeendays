@@ -17,7 +17,7 @@ def response_task_create(rf, user):
 
 class TestTaskListView:
 
-    def test_list_my_issues(self, rf, finished_tasks):
+    def test_list_my_finished_issues(self, rf, finished_tasks):
         request = rf.get('/app/')
         request.user = finished_tasks[0].user
 
@@ -26,7 +26,16 @@ class TestTaskListView:
 
         assert len(response.context_data['task_list']) == 3
 
-    def test_cant_see_issues_from_another_user(self, rf, finished_tasks):
+    def test_see_my_unfinished_issue_in_highlight(self, rf, unfinished_tasks):
+        request = rf.get('/app/')
+        request.user = unfinished_tasks[0].user
+
+        task_list_view = TaskListView.as_view()
+        response = task_list_view(request)
+
+        assert len(response.context_data['task_started']) == 1
+
+    def test_cant_see_finished_issues_from_another_user(self, rf, finished_tasks):
         request = rf.get('/app/')
         request.user = finished_tasks[0].user
 
@@ -37,6 +46,18 @@ class TestTaskListView:
         response = task_list_view(request)
 
         assert len(response.context_data['task_list']) == 2
+
+    def test_cant_see_unfinished_issues_from_another_user(self, rf, unfinished_tasks):
+        request = rf.get('/app/')
+        request.user = unfinished_tasks[0].user
+
+        unfinished_tasks[0].user = UserFactory.create(username='another-user')
+        unfinished_tasks[0].save()
+
+        task_list_view = TaskListView.as_view()
+        response = task_list_view(request)
+
+        assert len(response.context_data['task_list']) == 0
 
 
 class TestTaskCreateView:

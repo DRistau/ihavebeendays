@@ -7,8 +7,12 @@
             <span class="cover-title-action">Without sleep</span></h1>
 
         <div class="cover-buttons">
-            <a href="#" class="button button-primary">Reset</a>
-            <a href="#" class="button">Done</a>
+            {% if task_started|length %}
+                <a href="#" class="button button-primary">Reset</a>
+                <a href="#" class="button">Done</a>
+            {% else %}
+                <a href="#" class="button button-primary">Start</a>
+            {% endif %}
         </div>
     </div>
     <!-- /.cover -->
