@@ -20,31 +20,13 @@
     <div class="tasks-done">
         <table class="tasks-done-table u-full-width">
             <tbody>
-                <tr>
-                    <td class="tasks-done-label">Without sleep</td>
-                    <td>1 day(s)</td>
-                    <td>Feb, 09 2015 - Feb, 10 2015</td>
+            {% for task in task_list %}
+                <tr class="tasks-done-task">
+                    <td class="tasks-done-label">{{ task.title }}</td>
+                    <td class="tasks-done-days">{{ task.duration }} day(s)</td>
+                    <td class="tasks-done-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
                 </tr>
-                <tr>
-                    <td class="tasks-done-label">Without sleep</td>
-                    <td>1 day(s)</td>
-                    <td>Feb, 09 2015 - Feb, 10 2015</td>
-                </tr>
-                <tr>
-                    <td class="tasks-done-label">Without sleep</td>
-                    <td>1 day(s)</td>
-                    <td>Feb, 09 2015 - Feb, 10 2015</td>
-                </tr>
-                <tr>
-                    <td class="tasks-done-label">Without sleep</td>
-                    <td>1 day(s)</td>
-                    <td>Feb, 09 2015 - Feb, 10 2015</td>
-                </tr>
-                <tr>
-                    <td class="tasks-done-label">Without sleep</td>
-                    <td>1 day(s)</td>
-                    <td>Feb, 09 2015 - Feb, 10 2015</td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
