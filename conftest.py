@@ -24,7 +24,8 @@ def task(db):
 
 @pytest.fixture(scope='function')
 def unfinished_tasks(db, user):
-    return TaskFactory.create_batch(1, user=user)
+    started_at = timezone.now() - timezone.timedelta(days=1)
+    return TaskFactory.create_batch(1, user=user, started_at=started_at)
 
 
 @pytest.fixture(scope='function')

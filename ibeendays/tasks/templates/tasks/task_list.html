@@ -4,11 +4,11 @@
     <div class="cover">
     {% with task_started|length as has_task %}
         <h1 class="cover-title">I been
-            <span class="cover-title-days">0 day(s)</span>
-
             {% if has_task %}
-                <span class="cover-title-action">Without sleep</span>
+                <span class="cover-title-days">{{ task_started.0.duration }} day(s)</span>
+                <span class="cover-title-action">{{ task_started.0.title }}</span>
             {% else %}
+                <span class="cover-title-days">0 day(s)</span>
                 <input type="text" class="cover-title-input-action" placeholder="Working out">
             {% endif %}
         </h1>

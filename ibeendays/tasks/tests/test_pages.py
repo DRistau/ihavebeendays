@@ -31,10 +31,16 @@ def test_tasks_page_shows_done_and_reset_actions_when_a_task_is_already_started(
     assert buttons.find('.button')[1].text == 'Done'
 
 
+def test_tasks_page_shows_task_duration_when_a_task_is_already_started(unfinished_tasks_response):
+    title = pq(unfinished_tasks_response.content).find('.cover-title-days')
+
+    assert title.text() == '1 day(s)'
+
+
 def test_tasks_page_shows_unfinished_task_title_when_a_task_is_already_started(unfinished_tasks_response):
     task_title = pq(unfinished_tasks_response.content).find('.cover-title-action')
 
-    assert task_title.text() == 'Without sleep'
+    assert task_title.text() == 'Task 10'
 
 
 def test_tasks_page_shows_start_action_when_doesnt_exist_a_started_task(finished_tasks_response):
@@ -46,7 +52,13 @@ def test_tasks_page_shows_start_action_when_doesnt_exist_a_started_task(finished
 def test_tasks_page_shows_a_input_to_add_tasks_when_doesnt_exist_a_started_task(finished_tasks_response):
     input_action = pq(finished_tasks_response.content).find('.cover-title-input-action')
 
-    assert input_action.attr('placeholder') == 'Working out'
+    assert input_action.length
+
+
+def test_tasks_page_shows_0_days_in_cover_when_doesnt_have_a_started_task(finished_tasks_response):
+    title = pq(finished_tasks_response.content).find('.cover-title-days')
+
+    assert title.text() == '0 day(s)'
 
 
 def test_tasks_finished_are_listed(finished_tasks_response):
@@ -58,7 +70,7 @@ def test_tasks_finished_are_listed(finished_tasks_response):
 def test_tasks_are_listed_with_titles_days_and_the_range_of_dates(finished_tasks_response):
     task = pq(finished_tasks_response.content).find('.tasks-done-task:eq(0)')
 
-    assert task.find('.tasks-done-label').text() == 'Task 18'
+    assert task.find('.tasks-done-label').text() == 'Task 23'
     assert task.find('.tasks-done-days').text() == '1 day(s)'
     assert task.find('.tasks-done-dates').text() == 'Feb, 09 2015 - Feb, 10 2015'
 

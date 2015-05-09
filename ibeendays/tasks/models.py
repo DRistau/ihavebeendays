@@ -24,5 +24,11 @@ class Task(models.Model):
         return self.title
 
     def duration(self):
-        delta = self.finished_at.date() - self.started_at.date()
+        started_at = self.started_at
+        finished_at = self.finished_at
+
+        if not finished_at:
+            finished_at = timezone.now()
+
+        delta = finished_at.date() - started_at.date()
         return delta.days
