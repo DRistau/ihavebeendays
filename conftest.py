@@ -22,12 +22,12 @@ def task(db):
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def unfinished_tasks(db, user):
     return TaskFactory.create_batch(1, user=user)
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def finished_tasks(db, user):
     started_at = timezone.datetime(2015, 2, 9, 12, 0, 0)
     finished_at = timezone.datetime(2015, 2, 10, 12, 0, 0)
