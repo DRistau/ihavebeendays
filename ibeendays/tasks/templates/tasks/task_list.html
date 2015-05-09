@@ -26,6 +26,10 @@
                     <td class="tasks-done-days">{{ task.duration }} day(s)</td>
                     <td class="tasks-done-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
                 </tr>
+            {% empty %}
+                <tr class="tasks-done-empty">
+                    <td>You don't have any finished task.</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>

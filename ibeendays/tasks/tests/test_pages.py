@@ -43,3 +43,10 @@ def test_tasks_are_listed_with_titles_days_and_the_range_of_dates(logged_in_requ
     assert task.find('.tasks-done-label').text() == 'Task 13'
     assert task.find('.tasks-done-days').text() == '1 day(s)'
     assert task.find('.tasks-done-dates').text() == 'Feb, 09 2015 - Feb, 10 2015'
+
+
+def test_shows_a_message_when_user_doesnt_have_tasks(logged_in_request):
+    response = logged_in_request(reverse('tasks'))
+    tasks = pq(response.content).find('.tasks-done-empty')
+
+    assert tasks.length
