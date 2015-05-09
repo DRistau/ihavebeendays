@@ -153,6 +153,10 @@ class Test(Base):
         }
     }
 
+    PASSWORD_HASHERS = (
+        'django.contrib.auth.hashers.MD5PasswordHasher',
+    )
+
 
 class Prod(Base):
     DATABASES = {
