@@ -32,6 +32,23 @@ def request_unfinished_tasks(rf, unfinished_tasks):
     return request
 
 
+@pytest.fixture
+def unfinished_task(task):
+    task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+    task.finished_at = None
+    task.save()
+
+    return task
+
+
+@pytest.fixture
+def response_task_reset(rf, user, unfinished_task):
+    request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
+    request.user = user
+    task_reset_view = TaskResetView.as_view()
+    return task_reset_view(request, pk=1)
+
+
 class TestTaskListView:
 
     def test_form_instance_exists_in_context(self, request_finished_tasks):
@@ -85,39 +102,19 @@ class TestTaskCreateView:
 class TestTaskResetView:
 
     @pytest.mark.django_db
-    def test_reset_a_task(self, rf, user, task):
-        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
-        task.finished_at = None
-        task.save()
-
-        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
-        request.user = user
-        task_reset_view = TaskResetView.as_view()
-        task_reset_view(request, pk=1)
-
+    def test_reset_a_task(self, response_task_reset):
         tasks = Task.objects.unfinished()
 
         assert tasks.count() == 1
         assert tasks[0].started_at.date() == timezone.now().date()
 
-    def test_redirect_to_tasks_after_reseting(self, rf, user, task):
-        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
-        task.finished_at = None
-        task.save()
+    def test_redirect_to_tasks_after_reseting(self, response_task_reset):
+        assert response_task_reset.status_code == 302
+        assert response_task_reset.url == reverse('tasks')
 
-        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
-        request.user = user
-        task_reset_view = TaskResetView.as_view()
-        response = task_reset_view(request, pk=1)
-
-        assert response.status_code == 302
-        assert response.url == reverse('tasks')
-
-    def test_dont_reset_tasks_from_another_user(self, rf, user, task):
-        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
-        task.finished_at = None
-        task.user = UserFactory.create(username='another-user')
-        task.save()
+    def test_dont_reset_tasks_from_another_user(self, rf, user, unfinished_task):
+        unfinished_task.user = UserFactory.create(username='another-user')
+        unfinished_task.save()
 
         request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
         request.user = user
