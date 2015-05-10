@@ -1,9 +1,10 @@
 import pytest
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from ibeendays.core.factories import UserFactory
 from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
-from ibeendays.tasks.views import TaskCreateView, TaskListView
+from ibeendays.tasks.views import TaskCreateView, TaskListView, TaskResetView
 
 
 @pytest.fixture
@@ -78,3 +79,35 @@ class TestTaskCreateView:
     def test_redirect_to_tasks_after_creation(self, response_task_create):
         assert response_task_create.status_code == 302
         assert response_task_create.url == reverse('tasks')
+
+
+class TestTaskResetView:
+
+    @pytest.mark.django_db
+    def test_reset_a_task(self, rf, user, task):
+        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+        task.finished_at = None
+        task.save()
+
+        request = rf.get('/tasks/1/reset/', {'pk': 1})
+        request.user = user
+        task_reset_view = TaskResetView.as_view()
+        task_reset_view(request, pk=1)
+
+        tasks = Task.objects.unfinished()
+
+        assert tasks.count() == 1
+        assert tasks[0].started_at.date() == timezone.now().date()
+
+    def test_redirect_to_tasks_after_reseting(self, rf, user, task):
+        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+        task.finished_at = None
+        task.save()
+
+        request = rf.get('/tasks/1/reset/')
+        request.user = user
+        task_reset_view = TaskResetView.as_view()
+        response = task_reset_view(request, pk=1)
+
+        assert response.status_code == 302
+        assert response.url == reverse('tasks')

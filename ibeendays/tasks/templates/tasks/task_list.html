@@ -18,7 +18,7 @@
 
                 <div class="cover-buttons">
                     {% if has_task %}
-                        <a href="#" class="button button-primary">Reset</a>
+                    <a href="{% url 'task-reset' pk=task_started.0.pk %}" class="button button-primary">Reset</a>
                         <a href="#" class="button">Done</a>
                     {% else %}
                         <input type="submit" class="button button-primary" value="Start">

@@ -1,6 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView, ListView
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.views.generic import CreateView, ListView, UpdateView
 from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
 
@@ -34,3 +36,26 @@ class TaskCreateView(CreateView):
 
     def post(self, *args, **kwargs):
         return super(TaskCreateView, self).post(*args, **kwargs)
+
+
+class TaskResetView(UpdateView):
+    model = Task
+    form_class = TaskForm
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.started_at = timezone.now()
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self):
+        return get_object_or_404(self.get_queryset(),
+                                 pk=self.kwargs.get('pk'))
+
+    def get_queryset(self):
+        qs = super(TaskResetView, self).get_queryset()
+        return qs.unfinished()
+
+    def get_success_url(self):
+        return reverse('tasks')
