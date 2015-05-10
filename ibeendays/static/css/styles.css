@@ -88,6 +88,9 @@
 .tasks-done-table tr:nth-child(2n) {
   background: #f9f9f9; }
 
+.tasks-done-days, .tasks-done-dates {
+  text-align: center; }
+
 .tasks-done-label {
   width: 30%; }
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -95,7 +98,7 @@
       width: 60%; } }
   @media (min-width: 1024px) {
     .tasks-done-label {
-      width: 70%; } }
+      width: 60%; } }
 
 .tasks-done-empty td {
   border-bottom: none;
