@@ -55,7 +55,7 @@ class TaskResetView(UpdateView):
 
     def get_queryset(self):
         qs = super(TaskResetView, self).get_queryset()
-        return qs.unfinished()
+        return qs.filter(user=self.request.user).unfinished()
 
     def get_success_url(self):
         return reverse('tasks')

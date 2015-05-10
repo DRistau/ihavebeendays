@@ -1,5 +1,6 @@
 import pytest
 from django.core.urlresolvers import reverse
+from django.http.response import Http404
 from django.utils import timezone
 from ibeendays.core.factories import UserFactory
 from ibeendays.tasks.forms import TaskForm
@@ -111,3 +112,15 @@ class TestTaskResetView:
 
         assert response.status_code == 302
         assert response.url == reverse('tasks')
+
+    def test_dont_reset_tasks_from_another_user(self, rf, user, task):
+        task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+        task.finished_at = None
+        task.user = UserFactory.create(username='another-user')
+        task.save()
+
+        request = rf.get('/tasks/1/reset/', {'pk': 1})
+        request.user = user
+        task_reset_view = TaskResetView.as_view()
+
+        pytest.raises(Http404, task_reset_view, request, pk=1)
