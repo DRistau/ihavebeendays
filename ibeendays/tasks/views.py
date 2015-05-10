@@ -59,3 +59,26 @@ class TaskResetView(UpdateView):
 
     def get_success_url(self):
         return reverse('tasks')
+
+
+class TaskDoneView(UpdateView):
+    model = Task
+    form_class = TaskForm
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.finished_at = timezone.now()
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self):
+        return get_object_or_404(self.get_queryset(),
+                                 pk=self.kwargs.get('pk'))
+
+    def get_queryset(self):
+        qs = super(TaskDoneView, self).get_queryset()
+        return qs.filter(user=self.request.user).unfinished()
+
+    def get_success_url(self):
+        return reverse('tasks')

@@ -5,7 +5,8 @@ from django.utils import timezone
 from ibeendays.core.factories import UserFactory
 from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
-from ibeendays.tasks.views import TaskCreateView, TaskListView, TaskResetView
+from ibeendays.tasks.views import (TaskCreateView, TaskDoneView, TaskListView,
+                                   TaskResetView)
 
 
 @pytest.fixture
@@ -47,6 +48,14 @@ def response_task_reset(rf, user, unfinished_task):
     request.user = user
     task_reset_view = TaskResetView.as_view()
     return task_reset_view(request, pk=1)
+
+
+@pytest.fixture
+def response_task_done(rf, user, unfinished_tasks):
+    request = rf.get(reverse('task-done', kwargs={'pk': 1}))
+    request.user = user
+    task_done_view = TaskDoneView.as_view()
+    return task_done_view(request, pk=1)
 
 
 class TestTaskListView:
@@ -121,3 +130,27 @@ class TestTaskResetView:
         task_reset_view = TaskResetView.as_view()
 
         pytest.raises(Http404, task_reset_view, request, pk=1)
+
+
+class TestTaskDoneView:
+
+    @pytest.mark.django_db
+    def test_finish_a_task(self, response_task_done):
+        tasks = Task.objects.finished()
+
+        assert tasks.count() == 1
+        assert tasks[0].finished_at.date() == timezone.now().date()
+
+    def test_redirect_to_tasks_after_finishing(self, response_task_done):
+        assert response_task_done.status_code == 302
+        assert response_task_done.url == reverse('tasks')
+
+    def test_dont_finish_a_task_from_another_user(self, rf, user, unfinished_task):
+        unfinished_task.user = UserFactory.create(username='another-user')
+        unfinished_task.save()
+
+        request = rf.get(reverse('task-done', kwargs={'pk': 1}))
+        request.user = user
+        task_done_view = TaskDoneView.as_view()
+
+        pytest.raises(Http404, task_done_view, request, pk=1)
