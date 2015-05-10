@@ -10,7 +10,7 @@ from ibeendays.tasks.views import TaskCreateView, TaskListView, TaskResetView
 
 @pytest.fixture
 def response_task_create(rf, user):
-    request = rf.post('/tasks/add/', {
+    request = rf.post(reverse('task-create'), {
         'title': 'Task test',
     })
     request.user = user
@@ -20,14 +20,14 @@ def response_task_create(rf, user):
 
 @pytest.fixture
 def request_finished_tasks(rf, finished_tasks):
-    request = rf.get('/app/')
+    request = rf.get(reverse('tasks'))
     request.user = finished_tasks[0].user
     return request
 
 
 @pytest.fixture
 def request_unfinished_tasks(rf, unfinished_tasks):
-    request = rf.get('/app/')
+    request = rf.get(reverse('tasks'))
     request.user = unfinished_tasks[0].user
     return request
 
@@ -90,7 +90,7 @@ class TestTaskResetView:
         task.finished_at = None
         task.save()
 
-        request = rf.get('/tasks/1/reset/', {'pk': 1})
+        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
         request.user = user
         task_reset_view = TaskResetView.as_view()
         task_reset_view(request, pk=1)
@@ -105,7 +105,7 @@ class TestTaskResetView:
         task.finished_at = None
         task.save()
 
-        request = rf.get('/tasks/1/reset/')
+        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
         request.user = user
         task_reset_view = TaskResetView.as_view()
         response = task_reset_view(request, pk=1)
@@ -119,7 +119,7 @@ class TestTaskResetView:
         task.user = UserFactory.create(username='another-user')
         task.save()
 
-        request = rf.get('/tasks/1/reset/', {'pk': 1})
+        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
         request.user = user
         task_reset_view = TaskResetView.as_view()
 
