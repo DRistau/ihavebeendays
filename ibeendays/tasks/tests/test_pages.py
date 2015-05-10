@@ -46,7 +46,7 @@ def test_tasks_page_shows_unfinished_task_title_when_a_task_is_already_started(u
 def test_tasks_page_shows_start_action_when_doesnt_exist_a_started_task(finished_tasks_response):
     buttons = pq(finished_tasks_response.content).find('.cover-buttons')
 
-    assert buttons.find('.button')[0].text == 'Start'
+    assert buttons.find('.button')[0].value == 'Start'
 
 
 def test_tasks_page_shows_a_input_to_add_tasks_when_doesnt_exist_a_started_task(finished_tasks_response):

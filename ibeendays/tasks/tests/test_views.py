@@ -1,6 +1,7 @@
 import pytest
 from django.core.urlresolvers import reverse
 from ibeendays.core.factories import UserFactory
+from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
 from ibeendays.tasks.views import TaskCreateView, TaskListView
 
@@ -30,6 +31,12 @@ def request_unfinished_tasks(rf, unfinished_tasks):
 
 
 class TestTaskListView:
+
+    def test_form_instance_exists_in_context(self, request_finished_tasks):
+        task_list_view = TaskListView.as_view()
+        response = task_list_view(request_finished_tasks)
+
+        assert isinstance(response.context_data['task_form'], TaskForm)
 
     def test_list_my_finished_issues(self, request_finished_tasks):
         task_list_view = TaskListView.as_view()

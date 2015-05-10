@@ -2,26 +2,30 @@
 
 {% block content %}
     <div class="cover">
-    {% with task_started|length as has_task %}
-        <h1 class="cover-title">I been
-            {% if has_task %}
-                <span class="cover-title-days">{{ task_started.0.duration }} day(s)</span>
-                <span class="cover-title-action">{{ task_started.0.title }}</span>
-            {% else %}
-                <span class="cover-title-days">0 day(s)</span>
-                <input type="text" class="cover-title-input-action" placeholder="Working out">
-            {% endif %}
-        </h1>
+        <form action="{% url 'task-create' %}" method="POST">
+            {% csrf_token %}
 
-        <div class="cover-buttons">
-            {% if has_task %}
-                <a href="#" class="button button-primary">Reset</a>
-                <a href="#" class="button">Done</a>
-            {% else %}
-                <a href="#" class="button button-primary">Start</a>
-            {% endif %}
-        </div>
-    {% endwith %}
+            {% with task_started|length as has_task %}
+                <h1 class="cover-title">I been
+                    {% if has_task %}
+                        <span class="cover-title-days">{{ task_started.0.duration }} day(s)</span>
+                        <span class="cover-title-action">{{ task_started.0.title }}</span>
+                    {% else %}
+                        <span class="cover-title-days">0 day(s)</span>
+                        {{ task_form.title }}
+                    {% endif %}
+                </h1>
+
+                <div class="cover-buttons">
+                    {% if has_task %}
+                        <a href="#" class="button button-primary">Reset</a>
+                        <a href="#" class="button">Done</a>
+                    {% else %}
+                        <input type="submit" class="button button-primary" value="Start">
+                    {% endif %}
+                </div>
+            {% endwith %}
+        </form>
     </div>
     <!-- /.cover -->
 

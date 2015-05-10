@@ -4,6 +4,6 @@ from tasks.views import TaskCreateView, TaskListView
 
 
 urlpatterns = patterns('',
-    url('$', login_required(TaskListView.as_view()), name='tasks'),
-    url('add/$', login_required(TaskCreateView.as_view()), name='task-create'),
+    url(r'^$', login_required(TaskListView.as_view()), name='tasks'),
+    url(r'^add/$', login_required(TaskCreateView.as_view()), name='task-create'),
 )

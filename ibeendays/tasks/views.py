@@ -1,4 +1,7 @@
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView
+from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
 
 
@@ -12,17 +15,22 @@ class TaskListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
         context['task_started'] = self.model.objects.filter(user=self.request.user).unfinished()
+        context['task_form'] = TaskForm()
 
         return context
 
 
 class TaskCreateView(CreateView):
     model = Task
-    fields = ['title', 'user']
-    success_url = '/tasks/'
+    form_class = TaskForm
+    http_method_names = ['post']
 
-    def get_form_kwargs(self):
-        kwargs = super(TaskCreateView, self).get_form_kwargs()
-        kwargs['data']['user'] = self.request.user.pk
+    def form_valid(self, form):
+        self.object = form.save(user=self.request.user)
+        return HttpResponseRedirect(self.get_success_url())
 
-        return kwargs
+    def get_success_url(self):
+        return reverse('tasks')
+
+    def post(self, *args, **kwargs):
+        return super(TaskCreateView, self).post(*args, **kwargs)
