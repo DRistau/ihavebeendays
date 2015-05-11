@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView
 from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task

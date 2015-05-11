@@ -20,3 +20,9 @@ def test_home_redirects_to_app_when_user_is_authenticated(logged_in_request):
 
     assert response.status_code == 302
     assert response.url == 'http://testserver/tasks/'
+
+
+def test_user_avatar_comes_from_gravatar(logged_in_request):
+    response = logged_in_request(reverse('tasks'))
+
+    assert 'https://www.gravatar.com/avatar/' in str(response.content)
