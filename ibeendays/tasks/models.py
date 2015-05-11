@@ -32,3 +32,7 @@ class Task(models.Model):
 
         delta = finished_at.date() - started_at.date()
         return delta.days
+
+    def reset(self):
+        self.started_at = timezone.now()
+        self.save()

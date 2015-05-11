@@ -22,3 +22,10 @@ def test_bring_only_finished_tasks(finished_tasks):
 
 def test_bring_only_unfinished_tasks(unfinished_tasks):
     assert len(unfinished_tasks) == 1
+
+
+def test_reset_task(task):
+    task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+    task.reset()
+
+    assert task.started_at.date() == timezone.now().date()

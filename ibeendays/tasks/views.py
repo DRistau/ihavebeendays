@@ -44,8 +44,7 @@ class TaskResetView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.started_at = timezone.now()
-        self.object.save()
+        self.object.reset()
 
         return HttpResponseRedirect(self.get_success_url())
 
