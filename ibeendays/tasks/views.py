@@ -66,8 +66,7 @@ class TaskDoneView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.finished_at = timezone.now()
-        self.object.save()
+        self.object.done()
 
         return HttpResponseRedirect(self.get_success_url())
 

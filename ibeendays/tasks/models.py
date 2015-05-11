@@ -36,3 +36,7 @@ class Task(models.Model):
     def reset(self):
         self.started_at = timezone.now()
         self.save()
+
+    def done(self):
+        self.finished_at = timezone.now()
+        self.save()

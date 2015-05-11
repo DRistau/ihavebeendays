@@ -29,3 +29,10 @@ def test_reset_task(task):
     task.reset()
 
     assert task.started_at.date() == timezone.now().date()
+
+
+def test_done_task(task):
+    task.finished_at = None
+    task.done()
+
+    assert task.finished_at.date() == timezone.now().date()
