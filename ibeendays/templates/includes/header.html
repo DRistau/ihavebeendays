@@ -15,10 +15,8 @@
                             <a href="{% url "logout" %}" class="navbar-item-link">Logout</a>
                         </li>
                         <li class="navbar-item">
-                            <a href="#" class="navbar-item-link">
-                                <img src="{% gravatar_from_email user.email %}"
-                                    class="navbar-avatar" width="42" height="42">
-                            </a>
+                            <img src="{% gravatar_from_email user.email %}"
+                                class="navbar-avatar" width="42" height="42">
                         </li>
 					{% else %}
                         <li class="navbar-item">
