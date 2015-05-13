@@ -2,8 +2,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
+from rest_framework import viewsets
 from ibeendays.tasks.forms import TaskForm
 from ibeendays.tasks.models import Task
+from ibeendays.tasks.serializers import TaskSerializer
 
 
 class TaskListView(ListView):
@@ -79,3 +81,8 @@ class TaskDoneView(UpdateView):
 
     def get_success_url(self):
         return reverse('tasks')
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
