@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load core_extras %}
 
 {% block content %}
 	<div class="cover">
@@ -16,7 +17,7 @@
         </div>
 
         <div class="cover-disclaimer">
-            <p>Don't believe me? I'm x days writing things in English
+            <p>Don't believe me? I'm {% example_days_duration %} days writing things in English
                 to practice de language :)</p>
         </div>
 	</div>
