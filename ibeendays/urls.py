@@ -4,7 +4,7 @@ from rest_framework import routers
 from ibeendays.tasks import views
 
 router = routers.DefaultRouter()
-router.register('tasks', views.TaskViewSet)
+router.register('tasks', views.TaskViewSet, base_name='tasks')
 
 urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
