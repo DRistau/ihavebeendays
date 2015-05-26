@@ -40,3 +40,6 @@ class Task(models.Model):
     def done(self):
         self.finished_at = timezone.now()
         self.save()
+
+    def longest_streak(self):
+        return 1

@@ -36,3 +36,10 @@ def test_done_task(task):
     task.done()
 
     assert task.finished_at.date() == timezone.now().date()
+
+
+def test_task_record(task):
+    task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
+    task.finished_at = timezone.datetime(2015, 1, 2, 12, 0, 0)
+
+    assert task.longest_streak() == 1
