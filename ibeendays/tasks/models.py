@@ -17,6 +17,7 @@ class Task(models.Model):
     title = models.CharField(max_length=255)
     started_at = models.DateTimeField(default=timezone.now)
     finished_at = models.DateTimeField(blank=True, null=True)
+    last_longer_duration = models.IntegerField(default=0)
 
     objects = TaskQuerySet.as_manager()
 

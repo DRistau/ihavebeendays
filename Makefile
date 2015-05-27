@@ -15,3 +15,10 @@ test: clean
 
 clean:
 	find . -name '*.pyc' -delete
+
+
+makemigrations:
+	python manage.py makemigrations
+
+migrate:
+	python manage.py migrate
