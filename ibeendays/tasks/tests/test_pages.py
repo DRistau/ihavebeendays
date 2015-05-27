@@ -40,7 +40,7 @@ def test_tasks_page_shows_task_duration_when_a_task_is_already_started(unfinishe
 def test_tasks_page_shows_unfinished_task_title_when_a_task_is_already_started(unfinished_tasks_response):
     task_title = pq(unfinished_tasks_response.content).find('.cover-title-action')
 
-    assert task_title.text() == 'Task 12'
+    assert task_title.text() == 'Unfinished Task'
 
 
 def test_tasks_page_shows_start_action_when_doesnt_exist_a_started_task(finished_tasks_response):
@@ -70,7 +70,7 @@ def test_tasks_finished_are_listed(finished_tasks_response):
 def test_tasks_are_listed_with_titles_days_and_the_range_of_dates(finished_tasks_response):
     task = pq(finished_tasks_response.content).find('.tasks-done-task:eq(0)')
 
-    assert task.find('.tasks-done-label').text() == 'Task 25'
+    assert 'Task' in task.find('.tasks-done-label').text()
     assert task.find('.tasks-done-days').text() == '1 day(s)'
     assert task.find('.tasks-done-dates').text() == 'Feb, 09 2015 - Feb, 10 2015'
 

@@ -9,3 +9,4 @@ class TaskFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = Task
+        django_get_or_create = ('title', )

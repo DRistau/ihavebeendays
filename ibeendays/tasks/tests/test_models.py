@@ -2,7 +2,7 @@ from django.utils import timezone
 
 
 def test_task_has_str_representation(task):
-    assert str(task) == 'Task 0'
+    assert str(task) == 'Factored Task'
 
 
 def test_task_computes_days_between_started_at_and_finished_at(task):

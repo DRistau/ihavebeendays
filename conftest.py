@@ -17,18 +17,20 @@ def task(db):
     three_days_behind = now - timezone.timedelta(days=3)
 
     return TaskFactory.create(
+        title='Factored Task',
         started_at=three_days_behind,
         finished_at=now,
     )
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture
 def unfinished_tasks(db, user):
     started_at = timezone.now() - timezone.timedelta(days=1)
-    return TaskFactory.create_batch(1, user=user, started_at=started_at)
+    return TaskFactory.create_batch(1, title='Unfinished Task', user=user,
+                                    started_at=started_at)
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture
 def finished_tasks(db, user):
     started_at = timezone.datetime(2015, 2, 9, 12, 0, 0)
     finished_at = timezone.datetime(2015, 2, 10, 12, 0, 0)
