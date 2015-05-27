@@ -33,6 +33,9 @@ class Task(models.Model):
         delta = finished_at.date() - started_at.date()
         return delta.days
 
+    def longest_duration(self):
+        return 1
+
     def reset(self):
         self.started_at = timezone.now()
         self.save()
@@ -40,6 +43,3 @@ class Task(models.Model):
     def done(self):
         self.finished_at = timezone.now()
         self.save()
-
-    def longest_streak(self):
-        return 1
