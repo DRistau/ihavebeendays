@@ -15,12 +15,6 @@ class TestTaskModel:
 
         assert task.duration() == 0
 
-    def test_done_task(self, task):
-        task.finished_at = None
-        task.done()
-
-        assert task.finished_at.date() == timezone.now().date()
-
     def test_longest_duration(self, task):
         task.started_at = timezone.datetime(2015, 1, 1, 12, 0, 0)
         task.finished_at = timezone.datetime(2015, 1, 2, 12, 0, 0)
@@ -39,6 +33,25 @@ class TestTaskReset:
     def test_reset_task_sets_a_longest_duration(self, task):
         task.started_at = self._get_started_at()
         task.reset()
+
+        assert task.last_longer_duration == 3
+        assert task.longest_duration() == 3
+
+    def _get_started_at(self):
+        return timezone.now() - timezone.timedelta(days=3)
+
+
+class TestTaskDone:
+
+    def test_done_task(self, task):
+        task.finished_at = None
+        task.done()
+
+        assert task.finished_at.date() == timezone.now().date()
+
+    def test_done_task_sets_a_longest_duration(self, task):
+        task.started_at = self._get_started_at()
+        task.done()
 
         assert task.last_longer_duration == 3
         assert task.longest_duration() == 3

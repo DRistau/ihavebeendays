@@ -51,7 +51,13 @@ class Task(models.Model):
         self.save()
 
     def done(self):
-        self.finished_at = timezone.now()
+        now = timezone.now()
+        delta = self._delta_between_dates(now, self.started_at)
+
+        if delta.days > self.last_longer_duration:
+            self.last_longer_duration = delta.days
+
+        self.finished_at = now
         self.save()
 
     def _delta_between_dates(self, date1, date2):
