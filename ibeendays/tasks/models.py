@@ -31,16 +31,28 @@ class Task(models.Model):
         if not finished_at:
             finished_at = timezone.now()
 
-        delta = finished_at.date() - started_at.date()
+        delta = self._delta_between_dates(finished_at, started_at)
         return delta.days
 
     def longest_duration(self):
-        return 1
+        if self.duration() > self.last_longer_duration:
+            return self.duration()
+
+        return self.last_longer_duration
 
     def reset(self):
-        self.started_at = timezone.now()
+        now = timezone.now()
+        delta = self._delta_between_dates(now, self.started_at)
+
+        if delta.days > self.last_longer_duration:
+            self.last_longer_duration = delta.days
+
+        self.started_at = now
         self.save()
 
     def done(self):
         self.finished_at = timezone.now()
         self.save()
+
+    def _delta_between_dates(self, date1, date2):
+        return date1.date() - date2.date()
