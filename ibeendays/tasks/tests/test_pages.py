@@ -1,6 +1,7 @@
 import pytest
 from pyquery import PyQuery as pq
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 
 @pytest.fixture
@@ -81,3 +82,17 @@ class TestTaskPageCoverWithUnfinishedTask:
         task_title = pq(unfinished_tasks_response.content).find('.cover-title-action')
 
         assert task_title.text() == 'Unfinished Task'
+
+    def test_shows_the_task_record_of_duration_when_task_is_already_started(self, unfinished_tasks_response):
+        task_longest_duration = pq(unfinished_tasks_response.content).find('.cover-title-longest-duration')
+
+        assert task_longest_duration.text() == '(Your record is 1 day(s))'
+
+    def test_doesnt_show_the_task_longest_duration_if_it_is_zero(self, logged_in_request, unfinished_tasks):
+        unfinished_tasks[0].started_at = timezone.now()
+        unfinished_tasks[0].save()
+
+        response = logged_in_request(reverse('tasks'))
+        task_longest_duration = pq(response.content).find('.cover-title-longest-duration')
+
+        assert len(task_longest_duration) == 0

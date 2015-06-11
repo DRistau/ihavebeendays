@@ -10,6 +10,9 @@
                     {% if has_task %}
                         <span class="cover-title-days">{{ task_started.0.duration }} day(s)</span>
                         <span class="cover-title-action">{{ task_started.0.title }}</span>
+                        {% if task_started.0.longest_duration > 0 %}
+                            <span class="cover-title-longest-duration">(Your record is {{ task_started.0.longest_duration }} day(s))</span>
+                        {% endif %}
                     {% else %}
                         <span class="cover-title-days">0 day(s)</span>
                         {{ task_form.title }}
