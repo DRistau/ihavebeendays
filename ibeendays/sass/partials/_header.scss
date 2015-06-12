@@ -1,5 +1,6 @@
 .header {
 	border-bottom: 1px solid #eee;
+  box-shadow: 0 0 10px -5px #999;
   height: 62px;
 
   @include tablet-and-desktop {
