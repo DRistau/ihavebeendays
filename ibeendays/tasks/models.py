@@ -6,7 +6,7 @@ from django.utils import timezone
 class TaskQuerySet(models.QuerySet):
 
     def finished(self):
-        return self.filter(finished_at__isnull=False)
+        return self.filter(finished_at__isnull=False).order_by('-finished_at')
 
     def unfinished(self):
         return self.filter(finished_at__isnull=True)
