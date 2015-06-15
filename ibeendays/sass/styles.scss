@@ -1,6 +1,6 @@
 @import "variables";
 @import "mixins";
 
-@import "partials/header";
-@import "partials/cover";
-@import "partials/tasks-done";
+@import "components/Header";
+@import "components/Cover";
+@import "components/TasksDone";

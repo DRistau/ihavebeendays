@@ -1,13 +1,15 @@
-.tasks-done-table tr:nth-child(2n) {
-  background: #f9f9f9;
-}
-
-.tasks-done-days,
-.tasks-done-dates {
+.TasksDone-days,
+.TasksDone-dates {
   text-align: center;
 }
 
-.tasks-done-label {
+.TasksDone {
+  tr:nth-child(2n) {
+    background: #f9f9f9;
+  }
+}
+
+.TasksDone-label {
   width: 30%;
 
   @include tablet {
@@ -18,7 +20,7 @@
   }
 }
 
-.tasks-done-empty {
+.TasksDone-empty {
   td {
     border-bottom: none;
     color: #999;

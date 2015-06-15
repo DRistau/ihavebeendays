@@ -5,7 +5,7 @@ from ibeendays.tasks.models import Task
 class TaskForm(forms.ModelForm):
     title = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'cover-title-input-action',
+            'class': 'Cover-titleInputAction',
             'placeholder': 'Working out',
             'required': 'true',
         })

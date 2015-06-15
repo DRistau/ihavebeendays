@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="cover">
+    <div class="Cover">
         <form action="{% url 'task-create' %}" method="POST">
             {% csrf_token %}
 
             {% with task_started|length as has_task %}
-                <h1 class="cover-title">I been
+                <h1 class="Cover-title">I been
                     {% if has_task %}
-                        <span class="cover-title-days">{{ task_started.0.duration }} day(s)</span>
-                        <span class="cover-title-action">{{ task_started.0.title }}</span>
+                        <span class="Cover-titleDays">{{ task_started.0.duration }} day(s)</span>
+                        <span class="Cover-titleAction">{{ task_started.0.title }}</span>
                         {% if task_started.0.longest_duration > 0 %}
-                            <span class="cover-title-longest-duration">(Your record is {{ task_started.0.longest_duration }} day(s))</span>
+                            <span class="Cover-titleLongestDuration">(Your record is {{ task_started.0.longest_duration }} day(s))</span>
                         {% endif %}
                     {% else %}
-                        <span class="cover-title-days">0 day(s)</span>
+                        <span class="Cover-titleDays">0 day(s)</span>
                         {{ task_form.title }}
                     {% endif %}
                 </h1>
 
-                <div class="cover-buttons">
+                <div class="Cover-buttons">
                     {% if has_task %}
                         <a href="{% url 'task-reset' pk=task_started.0.pk %}" class="button button-primary">Reset</a>
                         <a href="{% url 'task-done' pk=task_started.0.pk %}" class="button">Done</a>
@@ -32,22 +32,20 @@
     </div>
     <!-- /.cover -->
 
-    <div class="tasks-done">
-        <table class="tasks-done-table u-full-width">
-            <tbody>
-            {% for task in task_list %}
-                <tr class="tasks-done-task">
-                    <td class="tasks-done-label">{{ task.title }}</td>
-                    <td class="tasks-done-days">{{ task.duration }} day(s)</td>
-                    <td class="tasks-done-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
-                </tr>
-            {% empty %}
-                <tr class="tasks-done-empty">
-                    <td>You don't have any finished task.</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <table class="TasksDone u-full-width">
+        <tbody>
+        {% for task in task_list %}
+            <tr class="TasksDone-task">
+                <td class="TasksDone-label">{{ task.title }}</td>
+                <td class="TasksDone-days">{{ task.duration }} day(s)</td>
+                <td class="TasksDone-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
+            </tr>
+        {% empty %}
+            <tr class="TasksDone-empty">
+                <td>You don't have any finished task.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <!-- /.tasks-done -->
 {% endblock content %}

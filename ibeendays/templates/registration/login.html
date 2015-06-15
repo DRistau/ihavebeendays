@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="cover">
-        <h1 class="cover-title">Log in</h1>
+    <div class="Cover">
+        <h1 class="Cover-title">Log in</h1>
 
-        <div class="cover-description">
+        <div class="Cover-description">
             <p>First time here? No problem! Use your Facebook or Google Account
             to start using. <strong>It's free and always will be!</strong></p>
 
@@ -12,7 +12,7 @@
             It's easy, fast and extremely safe.</p>
         </div>
 
-        <div class="cover-buttons">
+        <div class="Cover-buttons">
             <a href="{% url "social:begin" "facebook" %}" class="button button-primary">Join with Facebook</a>
             <a href="{% url "social:begin" "google-oauth2" %}" class="button button-primary">Join with Google</a>
         </div>

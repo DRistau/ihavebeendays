@@ -1,33 +1,46 @@
 {% load core_extras %}
 
-<div class="header">
+<div class="Header">
 	<div class="container">
 		<div class="row">
-			<nav class="navbar">
-				<ul class="navbar-list">
-                    <li class="navbar-item"><a href="{% url "home" %}" class="navbar-logo">IBeenDays</a></li>
-                    <li class="navbar-item"><a href="{% url "home" %}" class="navbar-item-link">Home</a></li>
+			<nav class="Header-navBar">
+				<ul class="Header-navList">
+                    <li class="Header-navItem">
+                        <a
+                            href="{% url "home" %}"
+                            class="Header-logo">IBeenDays</a>
+                    </li>
+                    <li class="Header-navItem">
+                        <a
+                            href="{% url "home" %}"
+                            class="Header-navLink">Home</a>
+                    </li>
 				</ul>
 
-                <ul class="navbar-login">
+                <ul class="Header-login">
 					{% if user.is_authenticated %}
-                        <li class="navbar-item">
-                            <a href="{% url "logout" %}" class="navbar-item-link">Logout</a>
+                        <li class="Header-navItem">
+                            <a
+                                href="{% url "logout" %}"
+                                class="Header-navLink">Logout</a>
                         </li>
-                        <li class="navbar-item">
+                        <li class="Header-navItem">
                             <img src="{% gravatar_from_email user.email %}"
-                                class="navbar-avatar" width="42" height="42">
+                                class="Header-avatar" width="42" height="42">
                         </li>
 					{% else %}
-                        <li class="navbar-item">
-                            <a href="{% url "login" %}" class="navbar-item-link">Log in / Sign up</a>
+                        <li class="Header-navItem">
+                            <a
+                                href="{% url "login" %}"
+                                class="Header-navLink">Log in / Sign up</a>
                         </li>
 					{% endif %}
 				</ul>
 			</nav>
+            <!-- /.Header-navBar -->
 		</div>
 		<!-- /.row -->
 	</div>
 	<!-- /.container -->
 </div>
-<!-- /.header -->
+<!-- /.Header -->

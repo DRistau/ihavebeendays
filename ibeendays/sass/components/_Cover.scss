@@ -1,4 +1,4 @@
-.cover {
+.Cover {
   margin: 40px 0;
 
   @include desktop {
@@ -6,26 +6,26 @@
   }
 }
 
-.cover-title {
+.Cover-title {
   text-align: center;
 }
 
-.cover-title-action {
+.Cover-titleAction {
   display: block;
 }
 
-.cover-title-longest-duration {
+.Cover-titleLongestDuration {
   font-size: 16px;
 }
 
-.cover-title-input-action[type="text"] {
+.Cover-titleInputAction[type="text"] {
   border-color: #f1f1f1;
   height: 64px;
   text-align: center;
   width: 100%;
 }
 
-.cover-description {
+.Cover-description {
   margin-bottom: 4rem;
   text-align: center;
 
@@ -34,13 +34,13 @@
   }
 }
 
-.cover-disclaimer {
+.Cover-disclaimer {
   color: #999;
   font-size: 1rem;
   text-align: center;
 }
 
-.cover-buttons {
+.Cover-buttons {
   margin: 0 auto;
   text-align: center;
 
