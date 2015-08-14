@@ -62,7 +62,7 @@ class TestTaskPageCover:
     def test_shows_0_days_in_cover_when_doesnt_have_a_started_task(self, finished_tasks_response):
         title = pq(finished_tasks_response.content).find('.Cover-titleDays')
 
-        assert title.text() == '0 day(s)'
+        assert title.text() == 'for 0 day(s)'
 
 
 class TestTaskPageCoverWithUnfinishedTask:
@@ -76,7 +76,7 @@ class TestTaskPageCoverWithUnfinishedTask:
     def test_shows_task_duration_when_a_task_is_already_started(self, unfinished_tasks_response):
         title = pq(unfinished_tasks_response.content).find('.Cover-titleDays')
 
-        assert title.text() == '1 day(s)'
+        assert title.text() == 'for 1 day(s)'
 
     def test_shows_unfinished_task_title_when_a_task_is_already_started(self, unfinished_tasks_response):
         task_title = pq(unfinished_tasks_response.content).find('.Cover-titleAction')

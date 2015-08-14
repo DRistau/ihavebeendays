@@ -6,16 +6,16 @@
             {% csrf_token %}
 
             {% with task_started|length as has_task %}
-                <h1 class="Cover-title">I been
+                <h1 class="Cover-title">I have been
                     {% if has_task %}
-                        <span class="Cover-titleDays">{{ task_started.0.duration }} day(s)</span>
                         <span class="Cover-titleAction">{{ task_started.0.title }}</span>
+                        <span class="Cover-titleDays">for {{ task_started.0.duration }} day(s)</span>
                         {% if task_started.0.longest_duration > 0 %}
                             <span class="Cover-titleLongestDuration">(Your record is {{ task_started.0.longest_duration }} day(s))</span>
                         {% endif %}
                     {% else %}
-                        <span class="Cover-titleDays">0 day(s)</span>
                         {{ task_form.title }}
+                        <span class="Cover-titleDays">for 0 day(s)</span>
                     {% endif %}
                 </h1>
 
