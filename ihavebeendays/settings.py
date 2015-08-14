@@ -36,7 +36,7 @@ class Base(Configuration):
     TEMPLATE_DEBUG = False
 
     ALLOWED_HOSTS = [
-        'ihavebeendays.herokuapp.com',
+        '.herokuapp.com',
     ]
 
     # Application definition
