@@ -12,5 +12,5 @@ deploy:
     secure: RQbeO0flGg/FnbIGpss/u3tb8S3wbRwmDnZlNBLcx935LertqhlPjtVbp8SJpz0O72MpDd7BBWZX8azATOCsssSdKWiZ0etOx22R6i3XsSr/mkhkGkIu9ruNleNPR6CLbW2Qbr2UVOxIQQJQrMQDvbeR256lwwWp/r+Paq4Xj7I=
   app: ibeendays
   on:
-    repo: kplaube/ibeendays
+    repo: kplaube/ihavebeendays
   run: "./manage.py migrate"
