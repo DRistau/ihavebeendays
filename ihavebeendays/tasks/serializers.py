@@ -1,4 +1,4 @@
-from ibeendays.tasks.models import Task
+from ihavebeendays.tasks.models import Task
 from rest_framework import serializers
 
 

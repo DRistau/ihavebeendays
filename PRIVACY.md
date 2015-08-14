@@ -2,7 +2,7 @@
 
 ## About SPAM
 
-*IBeenDays* can be used as a personal productivity tool. To achieve this,
+*IHaveBeenDays* can be used as a personal productivity tool. To achieve this,
 we need to identify our users, and manage their tasks individually.
 
 Even though we have your email, we compromise in not sending to you
@@ -11,7 +11,7 @@ SPAMs, or give your personal information to any activity like that.
 
 ## About your social account
 
-*IBeenDays* uses OAuth for authentication. The only thing we keep in
+*IHaveBeenDays* uses OAuth for authentication. The only thing we keep in
 our databases is your email and the temporary token that Facebook or
 Google provides us, that tells you are (in fact) you.
 
@@ -23,7 +23,7 @@ the few information we have.
 
 ## Cookies
 
-*IBeenDays* uses Cookies to manage advertising, to understand behaviors
+*IHaveBeenDays* uses Cookies to manage advertising, to understand behaviors
 through Google Analytics reports, and to keep your session alive.
 
 Cookies used on this site can be installed by the same which are

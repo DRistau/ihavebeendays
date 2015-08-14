@@ -1,5 +1,5 @@
 """
-Django settings for ibeendays project.
+Django settings for ihavebeendays project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -18,7 +18,7 @@ class Base(Configuration):
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    PROJECT_DIR = os.path.join(BASE_DIR, 'ibeendays')
+    PROJECT_DIR = os.path.join(BASE_DIR, 'ihavebeendays')
     TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'), )
 
     sys.path.append(PROJECT_DIR)
@@ -36,7 +36,7 @@ class Base(Configuration):
     TEMPLATE_DEBUG = False
 
     ALLOWED_HOSTS = [
-        'ibeendays.herokuapp.com',
+        'ihavebeendays.herokuapp.com',
     ]
 
     # Application definition
@@ -52,8 +52,8 @@ class Base(Configuration):
         'social.apps.django_app.default',
         'rest_framework',
 
-        'ibeendays.core',
-        'ibeendays.tasks',
+        'ihavebeendays.core',
+        'ihavebeendays.tasks',
     )
 
     MIDDLEWARE_CLASSES = (
@@ -75,9 +75,9 @@ class Base(Configuration):
         'social.apps.django_app.context_processors.backends',
     )
 
-    ROOT_URLCONF = 'ibeendays.urls'
+    ROOT_URLCONF = 'ihavebeendays.urls'
 
-    WSGI_APPLICATION = 'ibeendays.wsgi.application'
+    WSGI_APPLICATION = 'ihavebeendays.wsgi.application'
 
     # Database
     # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

@@ -2,10 +2,10 @@ import pytest
 from django.core.urlresolvers import reverse
 from django.http.response import Http404
 from django.utils import timezone
-from ibeendays.core.factories import UserFactory
-from ibeendays.tasks.forms import TaskForm
-from ibeendays.tasks.models import Task
-from ibeendays.tasks.views import (TaskCreateView, TaskDoneView, TaskListView,
+from ihavebeendays.core.factories import UserFactory
+from ihavebeendays.tasks.forms import TaskForm
+from ihavebeendays.tasks.models import Task
+from ihavebeendays.tasks.views import (TaskCreateView, TaskDoneView, TaskListView,
                                    TaskResetView)
 
 

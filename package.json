@@ -1,17 +1,17 @@
 {
-  "name": "ibeendays",
+  "name": "ihavebeendays",
   "version": "1.0.0",
-  "description": "ibeendays",
+  "description": "ihavebeendays",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kplaube/ibeendays.git"
+    "url": "https://github.com/kplaube/ihavebeendays.git"
   },
   "author": "Klaus Laube",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kplaube/ibeendays/issues"
+    "url": "https://github.com/kplaube/ihavebeendays/issues"
   },
-  "homepage": "https://ibeendays.herokuapp.com/",
+  "homepage": "https://ihavebeendays.herokuapp.com/",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-autoprefixer": "^2.2.0",

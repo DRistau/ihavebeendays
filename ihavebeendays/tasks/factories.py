@@ -1,6 +1,6 @@
 import factory
-from ibeendays.core.factories import UserFactory
-from ibeendays.tasks.models import Task
+from ihavebeendays.core.factories import UserFactory
+from ihavebeendays.tasks.models import Task
 
 
 class TaskFactory(factory.DjangoModelFactory):

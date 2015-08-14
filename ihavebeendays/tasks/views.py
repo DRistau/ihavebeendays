@@ -3,10 +3,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
 from rest_framework import permissions, viewsets
-from ibeendays.tasks.forms import TaskForm
-from ibeendays.tasks.models import Task
-from ibeendays.tasks.permissions import IsOwnerPermission
-from ibeendays.tasks.serializers import TaskSerializer
+from ihavebeendays.tasks.forms import TaskForm
+from ihavebeendays.tasks.models import Task
+from ihavebeendays.tasks.permissions import IsOwnerPermission
+from ihavebeendays.tasks.serializers import TaskSerializer
 
 
 class TaskListView(ListView):

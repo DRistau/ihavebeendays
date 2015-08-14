@@ -1,5 +1,5 @@
 from django.utils import timezone
-from ibeendays.core.templatetags import core_extras
+from ihavebeendays.core.templatetags import core_extras
 
 
 def test_gravatar_from_email():

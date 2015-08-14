@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
-from ibeendays.tasks import views
+from ihavebeendays.tasks import views
 
 router = routers.DefaultRouter()
 router.register('tasks', views.TaskViewSet, base_name='tasks')

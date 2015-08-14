@@ -1,2 +1,2 @@
 [run]
-omit = ibeendays/wsgi.py
+omit = ihavebeendays/wsgi.py
