@@ -50,6 +50,7 @@ class Base(Configuration):
         'django.contrib.staticfiles',
 
         'social.apps.django_app.default',
+        'tastypie',
 
         'ihavebeendays.core',
         'ihavebeendays.tasks',
