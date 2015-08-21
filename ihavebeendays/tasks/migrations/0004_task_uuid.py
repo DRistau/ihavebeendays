@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='task',
             name='uuid',
-            field=uuidfield.fields.UUIDField(max_length=32, blank=True, editable=False),
+            field=uuidfield.fields.UUIDField(max_length=32, blank=True, null=True, editable=False),
             preserve_default=True,
         ),
     ]
