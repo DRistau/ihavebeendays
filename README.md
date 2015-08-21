@@ -1,7 +1,7 @@
 IHaveBeenDays
 =============
 
-[![Build Status](https://travis-ci.org/kplaube/ibeendays.svg?branch=master)](https://travis-ci.org/kplaube/ibeendays)
+[![Build Status](https://travis-ci.org/kplaube/ihavebeendays.svg?branch=master)](https://travis-ci.org/kplaube/ihavebeendays)
 [![Coverage Status](https://coveralls.io/repos/kplaube/ibeendays/badge.svg?branch=master)](https://coveralls.io/r/kplaube/ibeendays?branch=master)
 
 IHaveBeenDays (working title) is a web app that helps you tracking how many days
