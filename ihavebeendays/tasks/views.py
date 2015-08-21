@@ -2,11 +2,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
-from rest_framework import permissions, viewsets
 from ihavebeendays.tasks.forms import TaskForm
 from ihavebeendays.tasks.models import Task
-from ihavebeendays.tasks.permissions import IsOwnerPermission
-from ihavebeendays.tasks.serializers import TaskSerializer
 
 
 class TaskListView(ListView):
@@ -82,13 +79,3 @@ class TaskDoneView(UpdateView):
 
     def get_success_url(self):
         return reverse('tasks')
-
-
-class TaskViewSet(viewsets.ModelViewSet):
-    model = Task
-    serializer_class = TaskSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerPermission)
-
-    def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)

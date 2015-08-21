@@ -50,7 +50,6 @@ class Base(Configuration):
         'django.contrib.staticfiles',
 
         'social.apps.django_app.default',
-        'rest_framework',
 
         'ihavebeendays.core',
         'ihavebeendays.tasks',
