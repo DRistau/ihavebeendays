@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from tastypie.resources import ModelResource
+from tastypie.authentication import SessionAuthentication
 from ihavebeendays.tasks.models import Task
 
 
@@ -15,3 +16,4 @@ class TaskResource(ModelResource):
         allowed_methods = ['get']
         excludes = ['id']
         detail_uri_name = 'uuid'
+        authentication = SessionAuthentication()
