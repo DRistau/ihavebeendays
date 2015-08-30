@@ -1,7 +1,13 @@
 from django.conf.urls import url
 from tastypie.resources import ModelResource
 from tastypie.authentication import SessionAuthentication
+from tastypie.authorization import Authorization
 from ihavebeendays.tasks.models import Task
+
+
+class UserObjectsOnlyAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(user=bundle.request.user)
 
 
 class TaskResource(ModelResource):
@@ -11,9 +17,10 @@ class TaskResource(ModelResource):
         ]
 
     class Meta:
+        authentication = SessionAuthentication()
+        authorization = UserObjectsOnlyAuthorization()
         queryset = Task.objects.all()
         resource_name = 'tasks'
         allowed_methods = ['get']
         excludes = ['id']
         detail_uri_name = 'uuid'
-        authentication = SessionAuthentication()
