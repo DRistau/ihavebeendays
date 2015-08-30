@@ -49,7 +49,7 @@ class TaskResetView(UpdateView):
 
     def get_object(self):
         return get_object_or_404(self.get_queryset(),
-                                 pk=self.kwargs.get('pk'))
+                                 uuid=self.kwargs.get('uuid'))
 
     def get_queryset(self):
         qs = super(TaskResetView, self).get_queryset()
@@ -71,7 +71,7 @@ class TaskDoneView(UpdateView):
 
     def get_object(self):
         return get_object_or_404(self.get_queryset(),
-                                 pk=self.kwargs.get('pk'))
+                                 uuid=self.kwargs.get('uuid'))
 
     def get_queryset(self):
         qs = super(TaskDoneView, self).get_queryset()

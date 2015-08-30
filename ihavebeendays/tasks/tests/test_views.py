@@ -6,7 +6,7 @@ from ihavebeendays.core.factories import UserFactory
 from ihavebeendays.tasks.forms import TaskForm
 from ihavebeendays.tasks.models import Task
 from ihavebeendays.tasks.views import (TaskCreateView, TaskDoneView, TaskListView,
-                                   TaskResetView)
+                                       TaskResetView)
 
 
 @pytest.fixture
@@ -44,18 +44,18 @@ def unfinished_task(task):
 
 @pytest.fixture
 def response_task_reset(rf, user, unfinished_task):
-    request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
+    request = rf.get(reverse('task-reset', kwargs={'uuid': 1}))
     request.user = user
     task_reset_view = TaskResetView.as_view()
-    return task_reset_view(request, pk=1)
+    return task_reset_view(request, uuid='1')
 
 
 @pytest.fixture
 def response_task_done(rf, user, unfinished_tasks):
-    request = rf.get(reverse('task-done', kwargs={'pk': 1}))
+    request = rf.get(reverse('task-done', kwargs={'uuid': 1}))
     request.user = user
     task_done_view = TaskDoneView.as_view()
-    return task_done_view(request, pk=1)
+    return task_done_view(request, uuid=1)
 
 
 class TestTaskListView:
@@ -125,11 +125,11 @@ class TestTaskResetView:
         unfinished_task.user = UserFactory.create(username='another-user')
         unfinished_task.save()
 
-        request = rf.get(reverse('task-reset', kwargs={'pk': 1}))
+        request = rf.get(reverse('task-reset', kwargs={'uuid': 1}))
         request.user = user
         task_reset_view = TaskResetView.as_view()
 
-        pytest.raises(Http404, task_reset_view, request, pk=1)
+        pytest.raises(Http404, task_reset_view, request, uuid=1)
 
 
 class TestTaskDoneView:
@@ -149,8 +149,8 @@ class TestTaskDoneView:
         unfinished_task.user = UserFactory.create(username='another-user')
         unfinished_task.save()
 
-        request = rf.get(reverse('task-done', kwargs={'pk': 1}))
+        request = rf.get(reverse('task-done', kwargs={'uuid': 1}))
         request.user = user
         task_done_view = TaskDoneView.as_view()
 
-        pytest.raises(Http404, task_done_view, request, pk=1)
+        pytest.raises(Http404, task_done_view, request, uuid=1)
