@@ -11,6 +11,9 @@ def unfinished_tasks_response(logged_in_request, unfinished_tasks):
 
 @pytest.fixture
 def finished_tasks_response(logged_in_request, finished_tasks):
+    finished_tasks[0].uuid = '1'
+    finished_tasks[0].save()
+
     return logged_in_request(reverse('tasks'))
 
 
@@ -39,6 +42,15 @@ class TestTaskPageList:
         assert 'Task' in task.find('.TasksDone-label').text()
         assert task.find('.TasksDone-days').text() == '1 day(s)'
         assert task.find('.TasksDone-dates').text() == 'Feb, 09 2015 - Feb, 10 2015'
+
+    def test_tasks_have_a_remove_link_for_each_one(self, finished_tasks_response):
+        task = pq(finished_tasks_response.content).find('.TasksDone-task:eq(0)')
+        remove_url = reverse('task-delete', kwargs={
+            'uuid': 1,
+        })
+
+        assert 'Remove' in task.find('.TasksDone-delete').text()
+        assert task.find('.TasksDone-delete').attr('href') == remove_url
 
     def test_shows_a_message_when_user_doesnt_have_tasks(self, logged_in_request):
         response = logged_in_request(reverse('tasks'))

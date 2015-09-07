@@ -1,7 +1,7 @@
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from ihavebeendays.tasks.forms import TaskForm
 from ihavebeendays.tasks.models import Task
 
@@ -79,3 +79,19 @@ class TaskDoneView(UpdateView):
 
     def get_success_url(self):
         return reverse('tasks')
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    success_url = reverse_lazy('tasks')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def get_object(self):
+        return get_object_or_404(self.get_queryset(),
+                                 uuid=self.kwargs.get('uuid'))
+
+    def get_queryset(self):
+        qs = super(TaskDeleteView, self).get_queryset()
+        return qs.filter(user=self.request.user).finished()
