@@ -37,7 +37,7 @@
         {% for task in task_list %}
             <tr class="TasksDone-task">
                 <td class="TasksDone-label">{{ task.title }}</td>
-                <td class="TasksDone-days">{{ task.duration }} day(s)</td>
+                <td class="TasksDone-days">{{ task.last_longer_duration }} day(s)</td>
                 <td class="TasksDone-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
             </tr>
         {% empty %}

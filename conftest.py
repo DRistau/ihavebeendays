@@ -35,8 +35,10 @@ def unfinished_tasks(db, user):
 def finished_tasks(db, user):
     started_at = timezone.datetime(2015, 2, 9, 12, 0, 0)
     finished_at = timezone.datetime(2015, 2, 10, 12, 0, 0)
+    last_longer_duration = 1
     return TaskFactory.create_batch(3, user=user, started_at=started_at,
-                                    finished_at=finished_at)
+                                    finished_at=finished_at,
+                                    last_longer_duration=last_longer_duration)
 
 
 @pytest.fixture
