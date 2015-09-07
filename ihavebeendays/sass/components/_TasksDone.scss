@@ -12,10 +12,7 @@
 .TasksDone-label {
   width: 30%;
 
-  @include tablet {
-    width: 60%;
-  }
-  @include desktop {
+  @include tablet-and-desktop {
     width: 60%;
   }
 }
@@ -26,5 +23,26 @@
     color: #999;
     font-style: italic;
     text-align: center;
+  }
+}
+
+.TasksDone-delete {
+  background: #d9534f;
+  border: 1px solid #d43f3a;
+  color: white;
+  padding: 0 12px;
+
+  &:hover {
+      background: darken(#d9534f, 10%);
+      border-color: #d43f3a;
+      color: white;
+  }
+
+  .button-label {
+    display: none;
+
+    @include desktop {
+        display: inline;
+    }
   }
 }

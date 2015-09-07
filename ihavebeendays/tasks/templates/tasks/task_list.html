@@ -43,7 +43,10 @@
                     <a
                         href="{% url 'task-delete' uuid=task.uuid %}"
                         title="Do you want to remove this task?"
-                        class="TasksDone-delete button">Remove</a>
+                        class="TasksDone-delete button">
+                            <i class="fa fa-trash-o fa-lg"></i>
+                            <span class="button-label">Remove</span>
+                    </a>
                 </td>
             </tr>
         {% empty %}

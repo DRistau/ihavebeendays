@@ -98,10 +98,7 @@
 
 .TasksDone-label {
   width: 30%; }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .TasksDone-label {
-      width: 60%; } }
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .TasksDone-label {
       width: 60%; } }
 
@@ -110,3 +107,18 @@
   color: #999;
   font-style: italic;
   text-align: center; }
+
+.TasksDone-delete {
+  background: #d9534f;
+  border: 1px solid #d43f3a;
+  color: white;
+  padding: 0 12px; }
+  .TasksDone-delete:hover {
+    background: #c9302c;
+    border-color: #d43f3a;
+    color: white; }
+  .TasksDone-delete .button-label {
+    display: none; }
+    @media (min-width: 1024px) {
+      .TasksDone-delete .button-label {
+        display: inline; } }
