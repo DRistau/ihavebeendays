@@ -40,7 +40,10 @@
                 <td class="TasksDone-days">{{ task.last_longer_duration }} day(s)</td>
                 <td class="TasksDone-dates">{{ task.started_at|date:"M, d Y" }} - {{ task.finished_at|date:"M, d Y" }}</td>
                 <td class="TasksDone-buttons">
-                    <a href="{% url 'task-delete' uuid=task.uuid %}" title="Do you want to remove this task?" class="TasksDone-delete">Remove</a>
+                    <a
+                        href="{% url 'task-delete' uuid=task.uuid %}"
+                        title="Do you want to remove this task?"
+                        class="TasksDone-delete button">Remove</a>
                 </td>
             </tr>
         {% empty %}
