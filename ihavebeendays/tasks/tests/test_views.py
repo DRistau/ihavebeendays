@@ -2,6 +2,7 @@ import pytest
 from django.core.urlresolvers import reverse
 from django.http.response import Http404
 from django.utils import timezone
+from django.contrib.messages.storage.fallback import FallbackStorage
 from ihavebeendays.core.factories import UserFactory
 from ihavebeendays.tasks.forms import TaskForm
 from ihavebeendays.tasks.models import Task
@@ -16,6 +17,9 @@ def response_task_create(rf, user):
         'title': 'Task test',
     })
     request.user = user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     task_create_view = TaskCreateView.as_view()
     return task_create_view(request)
 
@@ -24,6 +28,9 @@ def response_task_create(rf, user):
 def request_finished_tasks(rf, finished_tasks):
     request = rf.get(reverse('tasks'))
     request.user = finished_tasks[0].user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     return request
 
 
@@ -31,6 +38,9 @@ def request_finished_tasks(rf, finished_tasks):
 def request_unfinished_tasks(rf, unfinished_tasks):
     request = rf.get(reverse('tasks'))
     request.user = unfinished_tasks[0].user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     return request
 
 
@@ -47,6 +57,9 @@ def unfinished_task(task):
 def response_task_reset(rf, user, unfinished_task):
     request = rf.get(reverse('task-reset', kwargs={'uuid': 1}))
     request.user = user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     task_reset_view = TaskResetView.as_view()
     return task_reset_view(request, uuid='1')
 
@@ -55,6 +68,9 @@ def response_task_reset(rf, user, unfinished_task):
 def response_task_done(rf, user, unfinished_tasks):
     request = rf.get(reverse('task-done', kwargs={'uuid': 1}))
     request.user = user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     task_done_view = TaskDoneView.as_view()
     return task_done_view(request, uuid=1)
 
@@ -66,6 +82,9 @@ def response_task_delete(rf, user, finished_tasks):
 
     request = rf.get(reverse('task-delete', kwargs={'uuid': '1'}))
     request.user = user
+    request.session = 'session'
+    request._messages = FallbackStorage(request)
+
     task_delete_view = TaskDeleteView.as_view()
     return task_delete_view(request, uuid=1)
 
@@ -185,6 +204,9 @@ class TestTaskDeleteView:
 
         request = rf.get(reverse('task-delete', kwargs={'uuid': 2}))
         request.user = user
+        request.session = 'session'
+        request._messages = FallbackStorage(request)
+
         task_delete_view = TaskDeleteView.as_view()
 
         pytest.raises(Http404, task_delete_view, request, uuid=2)
@@ -196,6 +218,8 @@ class TestTaskDeleteView:
 
         request = rf.get(reverse('task-delete', kwargs={'uuid': 1}))
         request.user = user
+        request.session = 'session'
+        request._messages = FallbackStorage(request)
         task_delete_view = TaskDeleteView.as_view()
 
         pytest.raises(Http404, task_delete_view, request, uuid=1)
