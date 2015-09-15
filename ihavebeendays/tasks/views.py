@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.contrib import messages
 from ihavebeendays.tasks.forms import TaskForm
 from ihavebeendays.tasks.models import Task
 
@@ -22,12 +23,15 @@ class TaskListView(ListView):
 
 
 class TaskCreateView(CreateView):
-    model = Task
-    form_class = TaskForm
     http_method_names = ['post']
+    form_class = TaskForm
+    model = Task
 
     def form_valid(self, form):
         self.object = form.save(user=self.request.user)
+
+        messages.success(self.request, 'Task created!')
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -44,6 +48,8 @@ class TaskResetView(UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.reset()
+
+        messages.success(self.request, 'Task reseted!')
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -67,6 +73,8 @@ class TaskDoneView(UpdateView):
         self.object = self.get_object()
         self.object.done()
 
+        messages.success(self.request, 'Task done!')
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_object(self):
@@ -86,6 +94,8 @@ class TaskDeleteView(DeleteView):
     success_url = reverse_lazy('tasks')
 
     def get(self, request, *args, **kwargs):
+        messages.success(self.request, 'Task removed!')
+
         return self.delete(request, *args, **kwargs)
 
     def get_object(self):

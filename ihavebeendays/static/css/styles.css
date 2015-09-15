@@ -122,3 +122,18 @@
     @media (min-width: 1024px) {
       .TasksDone-delete .button-label {
         display: inline; } }
+
+.Messages {
+  list-style: none;
+  margin: 10px 0; }
+
+.Messages-item {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 0;
+  padding: 10px; }
+
+.Messages-item--success {
+  background-color: #dff0d8;
+  border-color: #b2dba1;
+  color: #3c763d; }

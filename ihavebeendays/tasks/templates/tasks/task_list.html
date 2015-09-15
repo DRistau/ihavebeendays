@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if messages %}
+        <ul class="Messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="Messages-item Messages-item--{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="Cover">
         <form action="{% url 'task-create' %}" method="POST">
             {% csrf_token %}
