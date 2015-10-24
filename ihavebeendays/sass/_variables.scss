@@ -1,2 +1,8 @@
-$tablet-width: 768px;
-$desktop-width: 1024px;
+/* Media queries
+   Based on http://getskeleton.com/#queries */
+
+$mq-sm-width: 400px;  // small
+$mq-lm-width: 550px;  // light medium
+$mq-md-width: 750px;  // medium
+$mq-lg-width: 1000px; // large
+$mq-xl-width: 1200px; // extra large

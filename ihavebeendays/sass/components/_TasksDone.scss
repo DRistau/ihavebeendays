@@ -1,6 +1,5 @@
 .TasksDone-days,
-.TasksDone-dates,
-.TasksDone-buttons {
+.TasksDone-dates {
   text-align: center;
 }
 
@@ -13,7 +12,7 @@
 .TasksDone-label {
   width: 30%;
 
-  @include tablet-and-desktop {
+  @include mq-light-medium {
     width: 60%;
   }
 }
@@ -21,9 +20,13 @@
 .TasksDone-dates {
   display: none;
 
-  @include desktop {
+  @include mq-large {
     display: block;
   }
+}
+
+.TasksDone-buttons {
+  text-align: right;
 }
 
 .TasksDone-delete {
@@ -41,7 +44,7 @@
   .button-label {
     display: none;
 
-    @include desktop {
+    @include mq-large {
         display: inline;
     }
   }
