@@ -90,7 +90,7 @@
       .Cover-buttons .button {
         width: auto; } }
 
-.TasksDone-days, .TasksDone-dates {
+.TasksDone-days, .TasksDone-dates, .TasksDone-buttons {
   text-align: center; }
 
 .TasksDone tr:nth-child(2n) {
@@ -102,11 +102,11 @@
     .TasksDone-label {
       width: 60%; } }
 
-.TasksDone-empty td {
-  border-bottom: none;
-  color: #999;
-  font-style: italic;
-  text-align: center; }
+.TasksDone-dates {
+  display: none; }
+  @media (min-width: 1024px) {
+    .TasksDone-dates {
+      display: block; } }
 
 .TasksDone-delete {
   background: #d9534f;
@@ -122,6 +122,12 @@
     @media (min-width: 1024px) {
       .TasksDone-delete .button-label {
         display: inline; } }
+
+.TasksDone-empty td {
+  border-bottom: none;
+  color: #999;
+  font-style: italic;
+  text-align: center; }
 
 .Messages {
   list-style: none;
