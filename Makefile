@@ -5,7 +5,7 @@ install:
 run: clean grunt runserver
 
 runserver:
-	honcho start
+	python manage.py runserver
 
 grunt:
 	grunt &

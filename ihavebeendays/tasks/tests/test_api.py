@@ -62,3 +62,15 @@ class TestTaskDetailApi:
 
     def _get_from_task(self, client_fn, task):
         return client_fn(self.URL.format(task.uuid))
+
+
+class TestTaskSchemaApi:
+    URL = '/api/v1/tasks/schema/?format=json'
+
+    def test_access_as_anonymous_user_shows_error(self, client):
+        response = client.get(self.URL)
+        assert response.status_code == 401
+
+    def test_access_the_schema(self, logged_in_request):
+        response = logged_in_request(self.URL)
+        assert response.status_code == 200

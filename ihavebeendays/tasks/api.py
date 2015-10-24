@@ -10,13 +10,27 @@ class UserObjectsOnlyAuthorization(Authorization):
         return object_list.filter(user=bundle.request.user)
 
     def read_detail(self, object_list, bundle):
-        return bundle.obj.user == bundle.request.user
+        try:
+            instance_user = bundle.obj.user
+        except:
+            return True
+
+        return instance_user == bundle.request.user
 
 
 class TaskResource(ModelResource):
     def prepend_urls(self):
         return [
-            url(r"^(?P<resource_name>%s)/(?P<uuid>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name='api_dispatch_detail'),
+            url(
+                r"^(?P<resource_name>{0})/schema/$".format(self._meta.resource_name),
+                self.wrap_view('get_schema'),
+                name='api_get_schema',
+            ),
+            url(
+                r"^(?P<resource_name>{0})/(?P<uuid>[\w\d_.-]+)/$".format(self._meta.resource_name),
+                self.wrap_view('dispatch_detail'),
+                name='api_dispatch_detail',
+            ),
         ]
 
     class Meta:
