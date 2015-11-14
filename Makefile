@@ -11,7 +11,7 @@ grunt:
 	grunt &
 
 test: clean
-	py.test
+	py.test ./ihavebeendays/
 
 clean:
 	find . -name '*.pyc' -delete

@@ -1,7 +1,7 @@
 import pytest
 from django.utils import timezone
-from core.factories import UserFactory
-from tasks.factories import TaskFactory
+from .core.factories import UserFactory
+from .tasks.factories import TaskFactory
 
 pytestmark = pytest.mark.django_db
 
