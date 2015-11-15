@@ -1,5 +1,5 @@
 from django import forms
-from ihavebeendays.tasks.models import Task
+from ihavebeendays.tasks.models import Task, TaskReset
 
 
 class TaskForm(forms.ModelForm):
@@ -29,3 +29,11 @@ class TaskResetForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['description']
+
+    def reset(self):
+        self.instance.reset()
+
+        return TaskReset.objects.create(
+            task=self.instance,
+            description=self.cleaned_data['description'],
+        )

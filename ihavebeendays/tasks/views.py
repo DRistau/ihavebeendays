@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.contrib import messages
 from ihavebeendays.tasks.forms import TaskForm, TaskResetForm
-from ihavebeendays.tasks.models import Task, TaskReset
+from ihavebeendays.tasks.models import Task
 
 
 class TaskListView(ListView):
@@ -51,13 +51,9 @@ class TaskResetView(UpdateView):
         form = self.get_form()
 
         if form.is_valid():
-            self.object.reset()
-            TaskReset.objects.create(
-                task=self.object,
-                description=form.cleaned_data['description'],
-            )
-
+            form.reset()
             messages.success(self.request, 'Task reseted!')
+
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
