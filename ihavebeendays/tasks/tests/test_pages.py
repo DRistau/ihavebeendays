@@ -82,7 +82,7 @@ class TestTaskPageCoverWithUnfinishedTask:
     def test_shows_done_and_reset_actions_when_a_task_is_already_started(self, unfinished_tasks_response):
         buttons = pq(unfinished_tasks_response.content).find('.Cover-buttons')
 
-        assert buttons.find('.button')[0].value == 'Reset'
+        assert buttons.find('.button')[0].text == 'Reset'
         assert buttons.find('.button')[1].text == 'Done'
 
     def test_shows_task_duration_when_a_task_is_already_started(self, unfinished_tasks_response):

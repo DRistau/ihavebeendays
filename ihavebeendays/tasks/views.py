@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.contrib import messages
-from ihavebeendays.tasks.forms import TaskForm
-from ihavebeendays.tasks.models import Task
+from ihavebeendays.tasks.forms import TaskForm, TaskResetForm
+from ihavebeendays.tasks.models import Task, TaskReset
 
 
 class TaskListView(ListView):
@@ -43,15 +43,24 @@ class TaskCreateView(CreateView):
 
 class TaskResetView(UpdateView):
     model = Task
-    form_class = TaskForm
+    form_class = TaskResetForm
+    template_name = 'tasks/task_reset_form.html'
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.reset()
+        form = self.get_form()
 
-        messages.success(self.request, 'Task reseted!')
+        if form.is_valid():
+            self.object.reset()
+            TaskReset.objects.create(
+                task=self.object,
+                description=form.cleaned_data['description'],
+            )
 
-        return HttpResponseRedirect(self.get_success_url())
+            messages.success(self.request, 'Task reseted!')
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_object(self):
         return get_object_or_404(self.get_queryset(),

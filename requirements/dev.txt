@@ -11,3 +11,4 @@ pytest-cov
 pytest-xdist
 python-coveralls
 pyquery
+ipdb

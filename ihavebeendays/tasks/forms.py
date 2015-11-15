@@ -18,3 +18,11 @@ class TaskForm(forms.ModelForm):
     def save(self, user):
         self.instance.user = user
         return super(TaskForm, self).save()
+
+
+class TaskResetForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea, required=False)
+
+    class Meta:
+        model = Task
+        fields = ['description']
