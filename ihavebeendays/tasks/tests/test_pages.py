@@ -120,9 +120,9 @@ class TestTaskPageCoverWithUnfinishedTask:
 class TestTaskResetPage:
 
     def test_shows_the_name_of_the_task(self, task_reset_response):
-        task_name = pq(task_reset_response.content).find('.Task-title')[0]
+        task_name = pq(task_reset_response.content).find('.Cover-title')[0]
 
-        assert task_name.text == 'Unfinished Task'
+        assert 'Unfinished Task' in task_name.text_content()
 
     def test_shows_a_form_with_description_field(self, task_reset_response):
         form = pq(task_reset_response.content).find('form')

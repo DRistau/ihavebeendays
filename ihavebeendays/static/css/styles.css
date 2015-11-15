@@ -69,7 +69,7 @@
   font-size: 25.6px;
   font-size: 1.6rem; }
 
-.Cover-titleInputAction[type="text"] {
+.Cover-titleInputAction, .Cover-titleInputAction[type="text"] {
   border-color: #f1f1f1;
   height: 64px;
   text-align: center;

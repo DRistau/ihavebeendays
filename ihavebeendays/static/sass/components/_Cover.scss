@@ -19,11 +19,13 @@
   font-size: 1.6rem;
 }
 
-.Cover-titleInputAction[type="text"] {
-  border-color: #f1f1f1;
-  height: 64px;
-  text-align: center;
-  width: 100%;
+.Cover-titleInputAction {
+  &, &[type="text"] {
+    border-color: #f1f1f1;
+    height: 64px;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .Cover-description {

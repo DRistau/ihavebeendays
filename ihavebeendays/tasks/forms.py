@@ -21,7 +21,10 @@ class TaskForm(forms.ModelForm):
 
 
 class TaskResetForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea, required=False)
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'class': 'Cover-titleInputAction',
+        'placeholder': 'What motivated you to reset this task?',
+    }))
 
     class Meta:
         model = Task

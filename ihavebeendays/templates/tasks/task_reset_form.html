@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="Task-title">{{ form.instance.title }}</h1>
+    {% include "includes/messages.html" %}
 
-    <form action="{% url 'task-reset' uuid=form.instance.uuid %}" method="POST">
-        {% csrf_token %}
+    <div class="Cover">
+        <h1 class="Cover-title">
+            Do you want to reset the task <span class="Cover-titleAction">"{{ form.instance.title }}"?</span>
+        </h1>
 
-        {{ form.as_p }}
+        <form action="{% url 'task-reset' uuid=form.instance.uuid %}" method="POST">
+            {% csrf_token %}
 
-        <input type="submit" value="Confirm" class="button">
-        <a href="{% url 'tasks' %}" class="button">Cancel</a>
-    </form>
+            {{ form.description }}
+
+            <div class="Cover-buttons">
+                <input type="submit" value="Confirm" class="button button-primary">
+                <a href="{% url 'tasks' %}" class="button">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <!-- /.cover -->
 {% endblock content %}
