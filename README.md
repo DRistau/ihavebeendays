@@ -40,11 +40,12 @@ Remember: [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/lates
 Running
 -------
 
-You can serve the application throught **runserver** task, that will run the HTTP server throught [Gunicorn](http://gunicorn.org/):
+You can serve the application throught `runserver` task, that will run the
+HTTP server throught [Gunicorn](http://gunicorn.org/):
 
-    $ make run
+    $ make runserver
 
-Now you can access the service through **http://localhost:5000**.
+Now you can access the service through `http://localhost:5000`.
 
 For debugging purposes, you can run the [Django's built-in HTTP server](https://docs.djangoproject.com/en/1.7/ref/django-admin/#runserver-port-or-address-port) throught **manage.py**:
 
@@ -59,7 +60,7 @@ We use Grunt to automate part of our flow. Grunt will help us compiling our SCSS
 
     $ make build
 
-To keep our lives easier, you can run all the project stack through **run** task:
+To keep our lives easier, you can run all the project stack through `run` task:
 
     $ make run
 
