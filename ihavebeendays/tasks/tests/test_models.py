@@ -22,7 +22,7 @@ class TestTaskModel:
         assert task.longest_duration() == 1
 
 
-class TestTaskReset:
+class TestTaskModelReset:
 
     def test_reset_task(self, task):
         task.started_at = self._get_started_at()
