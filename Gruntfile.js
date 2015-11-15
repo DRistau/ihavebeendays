@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
     var config = {
         pkg: grunt.file.readJSON('package.json'),
-        appPath: 'ihavebeendays'
+        appPath: 'ihavebeendays',
+        staticPath: '<%= appPath %>/static'
     };
 
     config.sass = {
@@ -11,20 +12,23 @@ module.exports = function(grunt) {
         },
         dist: {
             files: {
-                '<%= appPath %>/static/css/styles.css': '<%= appPath %>/sass/styles.scss'
+                '<%= staticPath %>/css/styles.css': '<%= staticPath %>/sass/styles.scss'
             }
         }
     };
 
     config.autoprefixer = {
         no_dest_single: {
-            src: '<%= appPath %>/static/css/styles.css',
+            src: '<%= staticPath %>/css/styles.css',
         }
     };
 
     config.watch = {
+        options: {
+            livereload: true
+        },
         sass: {
-            files: ['<%= appPath %>/sass/**/*.{scss,sass}', '<%= appPath %>/sass/partials/**/*.{scss,sass}'],
+            files: ['<%= staticPath %>/sass/**/*.{scss,sass}', '<%= staticPath %>/sass/partials/**/*.{scss,sass}'],
             tasks: ['sass:dist', 'autoprefixer']
         }
     };
