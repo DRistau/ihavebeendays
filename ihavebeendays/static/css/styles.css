@@ -10,10 +10,11 @@
 
 .Header-logo {
   color: #222;
-  font-size: 14px; }
+  font-size: 22.4px;
+  font-size: 1.4rem; }
   @media (min-width: 550px) {
     .Header-logo {
-      font-size: 18px; } }
+      font-size: 1.8rem; } }
 
 .Header-navList {
   float: left;
@@ -31,11 +32,12 @@
 .Header-navLink {
   color: #222;
   display: block;
-  font-size: 12px;
+  font-size: 19.2px;
+  font-size: 1.2rem;
   text-decoration: none; }
   @media (min-width: 550px) {
     .Header-navLink {
-      font-size: 14px;
+      font-size: 1.4rem;
       letter-spacing: 2px; } }
 
 .Header-login {
@@ -64,7 +66,8 @@
 
 .Cover-titleLongestDuration {
   display: block;
-  font-size: 16px; }
+  font-size: 25.6px;
+  font-size: 1.6rem; }
 
 .Cover-titleInputAction[type="text"] {
   border-color: #f1f1f1;
@@ -73,13 +76,16 @@
   width: 100%; }
 
 .Cover-description {
+  margin-bottom: 64px;
   margin-bottom: 4rem;
   text-align: center; }
   .Cover-description p {
+    margin-bottom: 8px;
     margin-bottom: 0.5rem; }
 
 .Cover-disclaimer {
   color: #999;
+  font-size: 16px;
   font-size: 1rem;
   text-align: center; }
 

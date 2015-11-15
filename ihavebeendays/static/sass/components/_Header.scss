@@ -10,10 +10,10 @@
 
 .Header-logo {
   color: #222;
-  font-size: 14px;
+  font-size: 1.4rem;
 
   @include mq-light-medium {
-	  font-size: 18px;
+	  font-size: 1.8rem;
   }
 }
 
@@ -39,11 +39,11 @@
 .Header-navLink {
   color: #222;
   display: block;
-  font-size: 12px;
+  font-size: 1.2rem;
   text-decoration: none;
 
   @include mq-light-medium {
-    font-size: 14px;
+    font-size: 1.4rem;
     letter-spacing: 2px;
   }
 }

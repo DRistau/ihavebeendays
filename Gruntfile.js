@@ -1,14 +1,11 @@
 module.exports = function(grunt) {
+    var autoprefixer = require('autoprefixer'),
+        pixrem = require('pixrem');
+
     var config = {
         pkg: grunt.file.readJSON('package.json'),
         appPath: 'ihavebeendays',
         staticPath: '<%= appPath %>/static'
-    };
-
-    config.autoprefixer = {
-        no_dest_single: {
-            src: '<%= staticPath %>/css/styles.css',
-        }
     };
 
     config.sass = {
@@ -37,22 +34,36 @@ module.exports = function(grunt) {
         }
     };
 
+    config.postcss = {
+        options: {
+            processors: [
+                pixrem(),
+                autoprefixer({
+                    browsers: 'last 2 versions'
+                })
+            ]
+        },
+        dist: {
+            src: '<%= staticPath %>/css/styles.css'
+        }
+    };
+
     config.watch = {
         options: {
             livereload: true
         },
         sass: {
             files: ['<%= staticPath %>/sass/**/*.{scss,sass}', '<%= staticPath %>/sass/partials/**/*.{scss,sass}'],
-            tasks: ['sass:dist', 'uglify:dist', 'autoprefixer']
+            tasks: ['sass:dist', 'postcss', 'cssmin']
         }
     };
 
     grunt.initConfig(config);
 
-    grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('default', ['sass', 'cssmin', 'autoprefixer', 'watch:sass']);
+    grunt.registerTask('default', ['sass', 'postcss', 'cssmin', 'watch:sass']);
 };
