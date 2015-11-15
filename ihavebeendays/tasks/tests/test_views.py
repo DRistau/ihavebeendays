@@ -61,7 +61,7 @@ def response_task_reset(rf, user, unfinished_task):
     request._messages = FallbackStorage(request)
 
     task_reset_view = TaskResetView.as_view()
-    return task_reset_view(request, uuid='1')
+    return task_reset_view(request, uuid='7f1741b8-6cbd-4de7-b324-8840d643e08a')
 
 
 @pytest.fixture
@@ -72,12 +72,12 @@ def response_task_done(rf, user, unfinished_tasks):
     request._messages = FallbackStorage(request)
 
     task_done_view = TaskDoneView.as_view()
-    return task_done_view(request, uuid=1)
+    return task_done_view(request, uuid='7f1741b8-6cbd-4de7-b324-8840d643e08a')
 
 
 @pytest.fixture
 def response_task_delete(rf, user, finished_tasks):
-    finished_tasks[0].uuid = '1'
+    finished_tasks[0].uuid = '7f1741b8-6cbd-4de7-b324-8840d643e08a'
     finished_tasks[0].save()
 
     request = rf.get(reverse('task-delete', kwargs={'uuid': '1'}))
@@ -86,7 +86,7 @@ def response_task_delete(rf, user, finished_tasks):
     request._messages = FallbackStorage(request)
 
     task_delete_view = TaskDeleteView.as_view()
-    return task_delete_view(request, uuid=1)
+    return task_delete_view(request, uuid='7f1741b8-6cbd-4de7-b324-8840d643e08a')
 
 
 class TestTaskListView:
@@ -191,7 +191,7 @@ class TestTaskDeleteView:
 
     @pytest.mark.django_db
     def test_remove_a_task(self, response_task_delete):
-        tasks = Task.objects.filter(uuid='1')
+        tasks = Task.objects.filter(uuid='7f1741b8-6cbd-4de7-b324-8840d643e08a')
         assert tasks.count() == 0
 
     def test_redirect_to_tasks_after_removing(self, response_task_delete):
@@ -199,7 +199,7 @@ class TestTaskDeleteView:
         assert response_task_delete.url == reverse('tasks')
 
     def test_dont_remove_an_unfinished_task(self, rf, user, unfinished_tasks):
-        unfinished_tasks[0].uuid = '2'
+        unfinished_tasks[0].uuid = '7f1741b8-6cbd-4de7-b324-8840d643e08a'
         unfinished_tasks[0].save()
 
         request = rf.get(reverse('task-delete', kwargs={'uuid': 2}))

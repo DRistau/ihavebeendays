@@ -1,7 +1,7 @@
+import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from uuidfield import UUIDField
 
 
 class TaskQuerySet(models.QuerySet):
@@ -14,7 +14,7 @@ class TaskQuerySet(models.QuerySet):
 
 
 class Task(models.Model):
-    uuid = UUIDField(auto=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     title = models.CharField(max_length=255)
     started_at = models.DateTimeField(default=timezone.now)

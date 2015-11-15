@@ -11,7 +11,7 @@ def unfinished_tasks_response(logged_in_request, unfinished_tasks):
 
 @pytest.fixture
 def finished_tasks_response(logged_in_request, finished_tasks):
-    finished_tasks[0].uuid = '1'
+    finished_tasks[0].uuid = '7F1741B8-6CBD-4DE7-B324-8840D643E08A'
     finished_tasks[0].save()
 
     return logged_in_request(reverse('tasks'))
@@ -46,7 +46,7 @@ class TestTaskPageList:
     def test_tasks_have_a_remove_link_for_each_one(self, finished_tasks_response):
         task = pq(finished_tasks_response.content).find('.TasksDone-task:eq(0)')
         remove_url = reverse('task-delete', kwargs={
-            'uuid': 1,
+            'uuid': '7f1741b8-6cbd-4de7-b324-8840d643e08a'
         })
 
         assert 'Remove' in task.find('.TasksDone-delete').text()
