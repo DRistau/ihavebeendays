@@ -72,3 +72,4 @@ class Task(models.Model):
 class TaskReset(models.Model):
     task = models.ForeignKey(Task)
     description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
