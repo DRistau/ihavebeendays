@@ -5,6 +5,12 @@ module.exports = function(grunt) {
         staticPath: '<%= appPath %>/static'
     };
 
+    config.autoprefixer = {
+        no_dest_single: {
+            src: '<%= staticPath %>/css/styles.css',
+        }
+    };
+
     config.sass = {
         options: {
             sourceMap: true,
@@ -17,9 +23,17 @@ module.exports = function(grunt) {
         }
     };
 
-    config.autoprefixer = {
-        no_dest_single: {
-            src: '<%= staticPath %>/css/styles.css',
+    config.cssmin = {
+        options: {
+            sourceMap: true
+        },
+        target: {
+            files: {
+                '<%= staticPath %>/css/styles.min.css': [
+                    '<%= staticPath %>/vendor/*.css',
+                    '<%= staticPath %>/css/styles.css'
+                ]
+            }
         }
     };
 
@@ -29,15 +43,16 @@ module.exports = function(grunt) {
         },
         sass: {
             files: ['<%= staticPath %>/sass/**/*.{scss,sass}', '<%= staticPath %>/sass/partials/**/*.{scss,sass}'],
-            tasks: ['sass:dist', 'autoprefixer']
+            tasks: ['sass:dist', 'uglify:dist', 'autoprefixer']
         }
     };
 
     grunt.initConfig(config);
 
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'watch:sass']);
+    grunt.registerTask('default', ['sass', 'cssmin', 'autoprefixer', 'watch:sass']);
 };
