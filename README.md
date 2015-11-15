@@ -30,7 +30,7 @@ To install the project, you'll need the following tools:
 * [PostgresSQL](http://www.postgresql.org/download/)
 * [Make](http://en.wikipedia.org/wiki/Make_(software))
 
-It's possible to install pretty much all project's dependencies throught **Makefile**:
+It's possible to install pretty much all project's dependencies throught `Makefile`:
 
     $ make setup
 
@@ -47,7 +47,7 @@ HTTP server throught [Gunicorn](http://gunicorn.org/):
 
 Now you can access the service through `http://localhost:5000`.
 
-For debugging purposes, you can run the [Django's built-in HTTP server](https://docs.djangoproject.com/en/1.7/ref/django-admin/#runserver-port-or-address-port) throught **manage.py**:
+For debugging purposes, you can run the [Django's built-in HTTP server](https://docs.djangoproject.com/en/1.7/ref/django-admin/#runserver-port-or-address-port) throught `manage.py`:
 
     $ python manage.py runserver
 
