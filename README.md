@@ -57,7 +57,7 @@ Developing
 We use Grunt to automate part of our flow. Grunt will help us compiling our SCSS and Javascript
 (if needed):
 
-    $ make grunt
+    $ make build
 
 To keep our lives easier, you can run all the project stack through **run** task:
 
