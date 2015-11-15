@@ -67,3 +67,8 @@ class Task(models.Model):
 
     def _delta_between_dates(self, date1, date2):
         return date1.date() - date2.date()
+
+
+class TaskReset(models.Model):
+    task = models.ForeignKey(Task)
+    description = models.TextField(blank=True, null=True)
