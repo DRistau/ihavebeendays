@@ -55,7 +55,7 @@ def unfinished_task(task):
 
 @pytest.fixture
 def response_task_reset(rf, user, unfinished_task):
-    request = rf.get(reverse('task-reset', kwargs={'uuid': 1}))
+    request = rf.post(reverse('task-reset', kwargs={'uuid': 1}))
     request.user = user
     request.session = 'session'
     request._messages = FallbackStorage(request)

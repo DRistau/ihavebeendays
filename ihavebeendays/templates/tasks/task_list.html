@@ -29,14 +29,20 @@
                     {% endif %}
                 </h1>
 
-                <div class="Cover-buttons">
-                    {% if has_task %}
-                        <a href="{% url 'task-reset' uuid=task_started.0.uuid %}" class="button button-primary">Reset</a>
-                        <a href="{% url 'task-done' uuid=task_started.0.uuid %}" class="button">Done</a>
-                    {% else %}
+                {% if has_task %}
+                    </form>
+                    <form action="{% url 'task-reset' uuid=task_started.0.uuid %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="Cover-buttons">
+                            <input type="submit" class="button button-primary" value="Reset">
+                            <a href="{% url 'task-done' uuid=task_started.0.uuid %}" class="button">Done</a>
+                        </div>
+                {% else %}
+                    <div class="Cover-buttons">
                         <input type="submit" class="button button-primary" value="Start">
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             {% endwith %}
         </form>
     </div>

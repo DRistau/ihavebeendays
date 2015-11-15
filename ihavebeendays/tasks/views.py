@@ -45,7 +45,7 @@ class TaskResetView(UpdateView):
     model = Task
     form_class = TaskForm
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.reset()
 
