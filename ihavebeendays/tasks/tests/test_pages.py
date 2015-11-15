@@ -17,6 +17,13 @@ def finished_tasks_response(logged_in_request, finished_tasks):
     return logged_in_request(reverse('tasks'))
 
 
+@pytest.fixture
+def task_reset_response(logged_in_request, unfinished_tasks):
+    return logged_in_request(reverse('task-reset', kwargs={
+        'uuid': unfinished_tasks[0].uuid,
+    }))
+
+
 class TestTaskPageAccess:
 
     def test_access_as_anonymous_user_redirects_to_login(self, client):
@@ -108,3 +115,24 @@ class TestTaskPageCoverWithUnfinishedTask:
         task_longest_duration = pq(response.content).find('.Cover-titleLongestDuration')
 
         assert len(task_longest_duration) == 0
+
+
+class TestTaskResetPage:
+
+    def test_shows_the_name_of_the_task(self, task_reset_response):
+        task_name = pq(task_reset_response.content).find('.Task-title')[0]
+
+        assert task_name.text == 'Unfinished Task'
+
+    def test_shows_a_form_with_description_field(self, task_reset_response):
+        form = pq(task_reset_response.content).find('form')
+
+        assert form.attr('action') == '/tasks/7f1741b8-6cbd-4de7-b324-8840d643e08a/reset/'
+        assert form.find('textarea')[0].name == 'description'
+
+    def test_shows_a_button_to_reset_and_a_button_to_cancel(self, task_reset_response):
+        form = pq(task_reset_response.content).find('form')
+        buttons = form.find('.button')
+
+        assert buttons[0].value == 'Confirm'
+        assert buttons[1].text == 'Cancel'
