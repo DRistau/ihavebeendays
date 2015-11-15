@@ -31,7 +31,7 @@ migrate:
 	python manage.py migrate
 
 runserver:
-	python manage.py runserver
+	honcho start
 
 test: clean
 	py.test ./ihavebeendays/

@@ -1,1 +1,1 @@
-web: gunicorn ihavebeendays.wsgi --log-file -
+web: gunicorn ihavebeendays.wsgi --reload --log-file -

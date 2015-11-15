@@ -32,7 +32,7 @@ To install the project, you'll need the following tools:
 
 It's possible to install pretty much all project's dependencies throught **Makefile**:
 
-    $ make install
+    $ make setup
 
 Remember: [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/) is life.
 
@@ -42,7 +42,7 @@ Running
 
 You can serve the application throught **runserver** task, that will run the HTTP server throught [Gunicorn](http://gunicorn.org/):
 
-    $ make runserver
+    $ make run
 
 Now you can access the service through **http://localhost:5000**.
 
