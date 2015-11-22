@@ -8,16 +8,23 @@ module.exports = function(grunt) {
         staticPath: '<%= appPath %>/static'
     };
 
-    config.sass = {
-        options: {
-            sourceMap: true,
-            outputStyle: 'expanded'
-        },
+    config.browserify = {
         dist: {
+            options: {
+                transform: [
+                    ['babelify', {presets: ['es2015', 'react']}]
+                ]
+            },
             files: {
-                '<%= staticPath %>/css/styles.css': '<%= staticPath %>/sass/styles.scss'
+                '<%= staticPath %>/js/dist/main.js': [
+                    '<%= staticPath %>/js/src/index.js'
+                ]
             }
         }
+    };
+
+    config.concurrent = {
+        watch: ['watch:sass', 'watch:scripts']
     };
 
     config.cssmin = {
@@ -48,22 +55,42 @@ module.exports = function(grunt) {
         }
     };
 
-    config.watch = {
+    config.sass = {
         options: {
-            livereload: true
+            sourceMap: true,
+            outputStyle: 'expanded'
         },
+        dist: {
+            files: {
+                '<%= staticPath %>/css/styles.css': '<%= staticPath %>/sass/styles.scss'
+            }
+        }
+    };
+
+    config.watch = {
         sass: {
+            options: {
+                livereload: true
+            },
             files: ['<%= staticPath %>/sass/**/*.{scss,sass}', '<%= staticPath %>/sass/partials/**/*.{scss,sass}'],
             tasks: ['sass:dist', 'postcss', 'cssmin']
+        },
+        scripts: {
+            files: ['<%= staticPath %>/js/src/*.js'],
+            tasks: ['browserify']
         }
     };
 
     grunt.initConfig(config);
 
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('default', ['sass', 'postcss', 'cssmin', 'watch:sass']);
+    grunt.registerTask('css', ['sass', 'postcss', 'cssmin']);
+    grunt.registerTask('js', ['browserify']);
+    grunt.registerTask('default', ['css', 'js', 'concurrent:watch']);
 };
