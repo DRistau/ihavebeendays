@@ -67,6 +67,17 @@ module.exports = function(grunt) {
         }
     };
 
+    config.uglify = {
+        dist: {
+            options: {
+                sourceMap: true
+            },
+            files: {
+                '<%= staticPath %>/js/dist/main.min.js': ['<%= staticPath %>/js/dist/main.js']
+            }
+        }
+    };
+
     config.watch = {
         sass: {
             options: {
@@ -77,7 +88,7 @@ module.exports = function(grunt) {
         },
         scripts: {
             files: ['<%= staticPath %>/js/src/*.js', '<%= staticPath %>/js/src/**/*.{js,jsx}'],
-            tasks: ['browserify']
+            tasks: ['js']
         }
     };
 
@@ -86,11 +97,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sass');
 
     grunt.registerTask('css', ['sass', 'postcss', 'cssmin']);
-    grunt.registerTask('js', ['browserify']);
+    grunt.registerTask('js', ['browserify', 'uglify:dist']);
     grunt.registerTask('default', ['css', 'js', 'concurrent:watch']);
 };
