@@ -11,7 +11,13 @@
                 <h1 class="Cover-title">I have been
                     {% if has_task %}
                         <span class="Cover-titleAction">{{ task_started.0.title }}</span>
-                        <span class="Cover-titleDays">for {{ task_started.0.duration }} day(s)</span>
+                        <span class="Cover-titleDays">for
+                            <span
+                                id="timer"
+                                data-starting-time="{{ task_started.0.started_at|date:"Y-m-d\TH:i:s\Z" }}">
+                                {{ task_started.0.duration }} day(s)
+                            </span>
+                        </span>
                         {% if task_started.0.longest_duration > 0 %}
                             <span class="Cover-titleLongestDuration">(Your record is {{ task_started.0.longest_duration }} day(s))</span>
                         {% endif %}

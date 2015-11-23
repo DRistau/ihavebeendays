@@ -76,7 +76,7 @@ module.exports = function(grunt) {
             tasks: ['sass:dist', 'postcss', 'cssmin']
         },
         scripts: {
-            files: ['<%= staticPath %>/js/src/*.js'],
+            files: ['<%= staticPath %>/js/src/*.js', '<%= staticPath %>/js/src/**/*.{js,jsx}'],
             tasks: ['browserify']
         }
     };
