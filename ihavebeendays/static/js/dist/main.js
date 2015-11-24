@@ -26,23 +26,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Timer = (function (_React$Component) {
     _inherits(Timer, _React$Component);
 
-    function Timer() {
+    function Timer(props) {
         _classCallCheck(this, Timer);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Timer).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Timer).call(this, props));
+
+        _this.startingAt = _moment2.default.utc(props.startingAt, 'YYYY-MM-DDThh:mm:ssZ');
+        return _this;
     }
 
     _createClass(Timer, [{
-        key: 'render',
-        value: function render() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
             var _this2 = this;
-
-            var startingAt = this.props.startingAt;
-            var fromNow = _moment2.default.utc(startingAt, 'YYYY-MM-DDThh:mm:ssZ').fromNow(true);
 
             setInterval(function () {
                 _this2.setState({});
             }, this.props.interval);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var fromNow = this.startingAt.fromNow(true);
 
             return _react2.default.createElement(
                 'span',
@@ -79,7 +84,7 @@ var $timer = document.querySelector('#timer');
 if ($timer) {
     var props = {
         startingAt: $timer.dataset.startingTime,
-        interval: 1000 * 30
+        interval: 1000 * 60
     };
 
     _reactDom2.default.render(_react2.default.createElement(_timer2.default, props), $timer);
